@@ -8,6 +8,9 @@
     "lint": {
       "outputs": []
     },
+    "docker:run": {
+      "outputs": []
+    },
     "dev": {
       "cache": false
     }
