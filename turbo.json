@@ -8,7 +8,7 @@
     "lint": {
       "outputs": []
     },
-    "docker:run": {
+    "docker:up": {
       "outputs": []
     },
     "dev": {

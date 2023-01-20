@@ -1,18 +1,18 @@
 version: "3"
 services:
-  oink-api:
-    container_name: oink-api
-    build:
-      context: .
-      dockerfile: Dockerfile
-    depends_on:
-      - postgres
-    environment:
-      DATABASE_URL: "postgres://postgres:${POSTGRES_PASSWD}@${POSTGRES_USER}:${POSTGRES_PORT}/${POSTGRES_DB}"
-      NODE_ENV: development
-      PORT: 4000
-    ports:
-      - "4000:4000"
+  # oink-api:
+  #   container_name: oink-api
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   depends_on:
+  #     - postgres
+  #   environment:
+  #     DATABASE_URL: "postgres://postgres:${POSTGRES_PASSWD}@${POSTGRES_USER}:${POSTGRES_PORT}/${POSTGRES_DB}"
+  #     NODE_ENV: development
+  #     PORT: 4000
+  #   ports:
+  #     - "4000:4000"
   postgres:
     container_name: oink-postgres
     image: postgres:15.1
@@ -23,5 +23,3 @@ services:
       POSTGRES_USER: "${POSTGRES_USER}"
       POSTGRES_PASSWORD: "${POSTGRES_PASSWD}"
       POSTGRES_DB: "${POSTGRES_DB}"
-volumes:
-    db-data:
