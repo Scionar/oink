@@ -1,0 +1,29 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "display": "Nest",
+    "extends": "./base.json",
+    "compilerOptions": {
+      "target": "es2017",
+      "lib": ["dom", "dom.iterable", "esnext"],
+      "allowJs": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "noEmit": true,
+      "esModuleInterop": true,
+      "module": "commonjs",
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "jsx": "preserve",
+      "removeComments": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "allowSyntheticDefaultImports": true,
+      "sourceMap": true,
+      "strictNullChecks": false,
+      "noImplicitAny": false,
+      "strictBindCallApply": false,
+      "noFallthroughCasesInSwitch": false
+    },
+    "include": ["src", "next-env.d.ts"],
+    "exclude": ["node_modules", "dist"]
+}
