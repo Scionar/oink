@@ -15,8 +15,8 @@ export class FoodsController {
   constructor(private foodService: FoodsService) {}
 
   @Get()
-  findAll(): string[] {
-    return [];
+  findAll() {
+    return this.foodService.findAll();
   }
 
   @Post()

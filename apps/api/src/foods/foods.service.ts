@@ -5,8 +5,8 @@ import { PrismaService } from "../prisma/prisma.service";
 export class FoodsService {
   constructor(private prisma: PrismaService) {}
 
-  findAll(): string[] {
-    return [];
+  async findAll() {
+    return await this.prisma.food.findMany();
   }
 
   findOne(): string {

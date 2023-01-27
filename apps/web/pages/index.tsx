@@ -1,10 +1,24 @@
 import { Button } from "ui";
+import useSWR from "swr";
+
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function Web() {
+  const { data, error, isLoading } = useSWR(`http://localhost:3001/foods`);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (!data || error) return <div>Failed</div>;
+
   return (
     <div>
-      <h1>Web</h1>
-      <Button />
+      <h1>Foods</h1>
+      <ul>
+        {data.map((item: any) => (
+          <li key={item.name}>
+            {item.name} / {item.calories}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
