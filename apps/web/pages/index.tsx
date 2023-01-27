@@ -1,8 +1,6 @@
 import { Button } from "ui";
 import useSWR from "swr";
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
 export default function Web() {
   const { data, error, isLoading } = useSWR(`http://localhost:3001/foods`);
 
