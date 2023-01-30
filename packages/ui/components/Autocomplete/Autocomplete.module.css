@@ -1,0 +1,105 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  justify-content: center;
+  margin-top: 100;
+  align-self: center;
+  position: relative;
+}
+
+.input {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-black);
+  border-radius: var(--theme-input-border-radius);
+  border-right: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  padding: 1rem;
+}
+
+.input:focus {
+  outline: var(--theme-focus-color) solid 2px;
+  outline-offset: 0.1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.optionList {
+  list-style: none;
+  width: 100%;
+  padding: 0;
+  margin: 4px 0 0 0;
+  position: absolute;
+  top: 100%;
+}
+
+.option {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-black);
+  padding: 1rem;
+  border-bottom: none;
+}
+
+.option:hover {
+  background-color: var(--color-gray);
+}
+
+.option:first-child {
+  border-top-left-radius: var(--theme-input-border-radius);
+  border-top-right-radius: var(--theme-input-border-radius);
+}
+
+.option:last-child {
+  border-bottom-left-radius: var(--theme-input-border-radius);
+  border-bottom-right-radius: var(--theme-input-border-radius);
+  border-bottom: 1px solid var(--color-black);
+}
+
+.clearButton {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-black);
+  border-radius: var(--theme-input-border-radius);
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding: 1rem;
+}
+
+.clearButton:hover {
+  background-color: var(--color-gray);
+}
+
+.clearButton:focus {
+  outline: var(--theme-focus-color) solid 2px;
+  outline-offset: 0.1rem;
+  z-index: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.addButton {
+  background-color: var(--color-white);
+  border: none;
+  border-top: 1px solid var(--color-black);
+  border-bottom: 1px solid var(--color-black);
+  border-top: 1px solid var(--color-black);
+  border-left: 1px solid var(--color-black);
+  padding: 1rem;
+}
+
+.addButton:hover {
+  background-color: var(--color-gray);
+}
+
+.addButton:focus {
+  outline: var(--theme-focus-color) solid 2px;
+  outline-offset: 0.1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.label {
+  color: var(--theme-input-label-color);
+  font-weight: var(--theme-input-label-weight);
+  font-size: var(--theme-input-label-size);
+}

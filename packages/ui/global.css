@@ -5,7 +5,14 @@
   /* Use https://chir.ag/projects/name-that-color/ */
 
   --color-white: #ffffff;
+  --color-gray: #808080;
   --color-black: #000000;
+
+  --theme-focus-color: #4d90fe;
+  --theme-input-border-radius: 0.5rem;
+  --theme-input-label-size: 100%;
+  --theme-input-label-weight: bold;
+  --theme-input-label-color: var(--color-black);
 
   --breakpoint-sm: 0;
   --breakpoint-md: 60rem; /* 600px */
@@ -18,7 +25,7 @@ html {
 }
 
 body {
-  background-color: var(--color-congo-brown);
+  background-color: var(--color-white);
   color: var(--primary-color);
   font-family: "Inter", sans-serif;
   font-size: 1.6rem; /* Use 16px font size, as a base font size */
