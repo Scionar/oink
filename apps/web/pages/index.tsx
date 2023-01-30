@@ -1,4 +1,6 @@
-import { Button } from "ui";
+import { Article, Button, Header, Snout } from "ui";
+import "ui/normalize.css";
+import "ui/global.css";
 import useSWR from "swr";
 
 export default function Web() {
@@ -9,14 +11,22 @@ export default function Web() {
 
   return (
     <div>
-      <h1>Foods</h1>
-      <ul>
-        {data.map((item: any) => (
-          <li key={item.name}>
-            {item.name} / {item.calories}
-          </li>
-        ))}
-      </ul>
+      <Header></Header>
+
+      <Article>
+        <>
+          <Snout />
+
+          <h1>Foods</h1>
+          <ul>
+            {data.map((item: any) => (
+              <li key={item.name}>
+                {item.name} / {item.calories}
+              </li>
+            ))}
+          </ul>
+        </>
+      </Article>
     </div>
   );
 }

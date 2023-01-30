@@ -1,0 +1,25 @@
+:root {
+  --primary-color: #262626;
+  --secondary-color: #f7f7f7;
+
+  /* Use https://chir.ag/projects/name-that-color/ */
+
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  --breakpoint-sm: 0;
+  --breakpoint-md: 60rem; /* 600px */
+  --breakpoint-lg: 102.4rem; /* 1024px */
+  --breakpoint-xl: 144rem; /* 1440px */
+}
+
+html {
+  font-size: 62.5%; /* Set font size to 10px, when using rem */
+}
+
+body {
+  background-color: var(--color-congo-brown);
+  color: var(--primary-color);
+  font-family: "Inter", sans-serif;
+  font-size: 1.6rem; /* Use 16px font size, as a base font size */
+}

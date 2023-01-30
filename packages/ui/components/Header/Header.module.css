@@ -1,0 +1,5 @@
+.root {
+  background-color: var(--color-white);
+  height: 10rem;
+  box-shadow: 0 0.1rem 1.5rem var(--color-black);
+}

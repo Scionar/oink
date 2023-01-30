@@ -1,0 +1,13 @@
+/* LG breakpoint */
+@media screen and (min-width: 102.4rem) {
+}
+
+/* XL breakpoint */
+@media screen and (min-width: 144rem) {
+}
+
+.root {
+  display: block;
+  margin: 0 auto;
+  max-width: 114rem;
+}
