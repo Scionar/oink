@@ -21,36 +21,30 @@ export default function Web() {
   if (!data || error) return <div>Failed</div>;
 
   return (
-    <div>
-      <Header></Header>
+    <Article>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
+        <Snout />
+        <Autocomplete
+          label="Add food"
+          optionList={options}
+          onAdd={onAddHandler}
+        />
+      </div>
 
-      <Article>
-        <>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              flexDirection: "column",
-            }}
-          >
-            <Snout />
-            <Autocomplete
-              label="Add food"
-              optionList={options}
-              onAdd={onAddHandler}
-            />
-          </div>
-
-          <h1>Foods</h1>
-          <ul>
-            {data.map((item: any) => (
-              <li key={item.name}>
-                {item.name} / {item.calories}
-              </li>
-            ))}
-          </ul>
-        </>
-      </Article>
-    </div>
+      <h1>Foods</h1>
+      <ul>
+        {data.map((item: any) => (
+          <li key={item.name}>
+            {item.name} / {item.calories}
+          </li>
+        ))}
+      </ul>
+    </Article>
   );
 }
