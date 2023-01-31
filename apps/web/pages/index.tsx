@@ -1,4 +1,12 @@
-import { Article, Autocomplete, DateInput, Input, Snout, SpacerForm } from "ui";
+import {
+  Article,
+  Autocomplete,
+  Button,
+  DateInput,
+  Input,
+  Snout,
+  SpacerForm,
+} from "ui";
 import "ui/normalize.css";
 import "ui/global.css";
 import useSWR from "swr";
@@ -53,6 +61,8 @@ export default function Web() {
         />
 
         <DateInput label="Date" value={date} onChange={dateOnChangeHandler} />
+
+        <Button>Submit</Button>
       </SpacerForm>
 
       <h1>Foods</h1>
