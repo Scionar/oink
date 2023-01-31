@@ -1,0 +1,5 @@
+.label {
+  color: var(--theme-input-label-color);
+  font-weight: var(--theme-input-label-weight);
+  font-size: var(--theme-input-label-size);
+}

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Label } from "../../common/Label/Label";
 import styles from "./DateInput.module.css";
 
 type DateInputProps = {
@@ -10,7 +11,7 @@ type DateInputProps = {
 export const DateInput = ({ label, value, onChange }: DateInputProps) => {
   return (
     <div className={styles.container}>
-      <label className={styles.label}>{label}</label>
+      <Label>{label}</Label>
       <input
         className={styles.input}
         value={value}

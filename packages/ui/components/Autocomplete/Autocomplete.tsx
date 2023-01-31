@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useCombobox } from "downshift";
 import styles from "./Autocomplete.module.css";
+import { Label } from "../../common/Label/Label";
 
 type Option = {
   name: string;
@@ -15,27 +16,24 @@ type AutocompleteProps = {
 
 export const Autocomplete = ({ label, optionList }: AutocompleteProps) => {
   const [inputItems, setInputItems] = React.useState(optionList);
-  const { isOpen, getLabelProps, getMenuProps, getInputProps, getItemProps } =
-    useCombobox({
-      items: inputItems,
-      itemToString: (item: Option | null) => {
-        return item ? item.name : "";
-      },
-      onInputValueChange: ({ inputValue }) => {
-        setInputItems(
-          optionList.filter((item) => {
-            const value = inputValue ? inputValue.toLowerCase() : "";
-            return item.name.toLowerCase().startsWith(value);
-          })
-        );
-      },
-    });
+  const { isOpen, getMenuProps, getInputProps, getItemProps } = useCombobox({
+    items: inputItems,
+    itemToString: (item: Option | null) => {
+      return item ? item.name : "";
+    },
+    onInputValueChange: ({ inputValue }) => {
+      setInputItems(
+        optionList.filter((item) => {
+          const value = inputValue ? inputValue.toLowerCase() : "";
+          return item.name.toLowerCase().startsWith(value);
+        })
+      );
+    },
+  });
 
   return (
     <div className={styles.container}>
-      <label className={styles.label} {...getLabelProps()}>
-        {label}
-      </label>
+      <Label>{label}</Label>
       <input className={styles.input} {...getInputProps()} />
       <ul {...getMenuProps()} className={styles.optionList}>
         {isOpen &&

@@ -50,9 +50,3 @@
   border-bottom-right-radius: var(--theme-input-border-radius);
   border-bottom: 1px solid var(--color-black);
 }
-
-.label {
-  color: var(--theme-input-label-color);
-  font-weight: var(--theme-input-label-weight);
-  font-size: var(--theme-input-label-size);
-}
