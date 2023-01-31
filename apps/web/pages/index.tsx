@@ -1,4 +1,4 @@
-import { Article, Autocomplete, Input, Snout } from "ui";
+import { Article, Autocomplete, Input, Snout, SpacerForm } from "ui";
 import "ui/normalize.css";
 import "ui/global.css";
 import useSWR from "swr";
@@ -30,13 +30,7 @@ export default function Web() {
 
   return (
     <Article>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "stretch",
-          flexDirection: "column",
-        }}
-      >
+      <SpacerForm>
         <Snout style={{ alignSelf: "center" }} />
 
         <Autocomplete label="Search" optionList={options} />
@@ -52,7 +46,7 @@ export default function Web() {
           value={addInputCaloriesValue}
           onChange={caloriesOnChangeHandler}
         />
-      </div>
+      </SpacerForm>
 
       <h1>Foods</h1>
       <ul>
