@@ -1,4 +1,4 @@
-import { Article, Autocomplete, Input, Snout, SpacerForm } from "ui";
+import { Article, Autocomplete, DateInput, Input, Snout, SpacerForm } from "ui";
 import "ui/normalize.css";
 import "ui/global.css";
 import useSWR from "swr";
@@ -16,6 +16,7 @@ export default function Web() {
   const [addInputNameValue, setAddInputNameValue] = useState<string>("");
   const [addInputCaloriesValue, setAddInputCaloriesValue] =
     useState<string>("");
+  const [date, setDate] = useState<string>("");
 
   if (isLoading) return <div>Loading...</div>;
   if (!data || error) return <div>Failed</div>;
@@ -26,6 +27,10 @@ export default function Web() {
 
   const caloriesOnChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setAddInputCaloriesValue(event.currentTarget.value);
+  };
+
+  const dateOnChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setDate(event.currentTarget.value);
   };
 
   return (
@@ -46,6 +51,8 @@ export default function Web() {
           value={addInputCaloriesValue}
           onChange={caloriesOnChangeHandler}
         />
+
+        <DateInput label="Date" value={date} onChange={dateOnChangeHandler} />
       </SpacerForm>
 
       <h1>Foods</h1>

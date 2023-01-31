@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.input {
+  background-color: var(--color-white);
+  border: 1px solid var(--theme-input-border-color);
+  border-radius: var(--theme-input-border-radius);
+  padding: 1rem;
+  outline: none;
+}
+
+.input:focus {
+  outline: var(--theme-focus-color) solid 2px;
+  outline-offset: 0.1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.label {
+  color: var(--theme-input-label-color);
+  font-weight: var(--theme-input-label-weight);
+  font-size: var(--theme-input-label-size);
+}
