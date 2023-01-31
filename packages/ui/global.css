@@ -9,6 +9,7 @@
   --color-black: #000000;
 
   --theme-focus-color: #4d90fe;
+  --theme-input-border-color: var(--color-black);
   --theme-input-border-radius: 0.5rem;
   --theme-input-label-size: 100%;
   --theme-input-label-weight: bold;

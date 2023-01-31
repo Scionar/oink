@@ -4,3 +4,4 @@ export * from "./components/Header/Header";
 export * from "./components/Article/Article";
 export * from "./components/Snout/Snout";
 export * from "./components/Autocomplete/Autocomplete";
+export * from "./components/Input/Input";
