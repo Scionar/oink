@@ -1,0 +1,36 @@
+.accordion {
+  border-bottom: 1px solid var(--color-black);
+  border-top: 1px solid var(--color-black);
+  margin-bottom: -1px;
+}
+
+.summaryWrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.summary {
+  flex-grow: 1;
+  padding: 1rem;
+  margin: 0;
+}
+
+.toggleWrapper {
+  flex-grow: auto;
+}
+
+.toggleButton {
+  all: unset;
+  cursor: pointer;
+  padding: 1rem;
+  transform: rotate(0deg);
+  transition: transform 0.25s;
+}
+
+.toggleButtonExpanded {
+  transform: rotate(-90deg);
+}
+
+.content {
+  padding: 1rem;
+}

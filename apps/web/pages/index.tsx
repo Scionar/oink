@@ -1,4 +1,5 @@
 import {
+  Accordion,
   Article,
   Autocomplete,
   Button,
@@ -64,6 +65,21 @@ export default function Web() {
 
         <Button>Submit</Button>
       </SpacerForm>
+
+      <Accordion summary="1.2.2022 - 942kcal">
+        <ul>
+          <li>Chicken McNugget</li>
+          <li>French Fries</li>
+          <li>Whopper</li>
+        </ul>
+      </Accordion>
+      <Accordion summary="2.2.2022 - 942kcal">
+        <ul>
+          <li>Chicken McNugget</li>
+          <li>French Fries</li>
+          <li>Whopper</li>
+        </ul>
+      </Accordion>
 
       <h1>Foods</h1>
       <ul>
