@@ -11,7 +11,7 @@ import {
 import "ui/normalize.css";
 import "ui/global.css";
 import useSWR from "swr";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useMemo, useState } from "react";
 
 const options = [
   { name: "Chicken McNugget", calories: 48, id: "mcnugget" },
@@ -27,9 +27,6 @@ export default function Web() {
     useState<string>("");
   const [date, setDate] = useState<string>("");
 
-  if (isLoading) return <div>Loading...</div>;
-  if (!data || error) return <div>Failed</div>;
-
   const nameOnChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setAddInputNameValue(event.currentTarget.value);
   };
@@ -42,13 +39,26 @@ export default function Web() {
     setDate(event.currentTarget.value);
   };
 
+  const autocompleteOptionList = useMemo(() => {
+    if (!data) return [];
+
+    return data.map((item: any) => ({
+      name: item.name,
+      calories: item.calories,
+      id: item.id,
+    }));
+  }, [data]);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (!data || error) return <div>Failed</div>;
+
   return (
     <Article>
       <Spacer>
         <Spacer variant="form">
           <Snout style={{ alignSelf: "center" }} />
 
-          <Autocomplete label="Search" optionList={options} />
+          <Autocomplete label="Search" optionList={autocompleteOptionList} />
 
           <Input
             label="Name"
