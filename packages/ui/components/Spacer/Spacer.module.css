@@ -1,0 +1,13 @@
+.spacer {
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+}
+
+.spacer.default > *:nth-child(n + 2) {
+  margin-top: 5rem;
+}
+
+.spacer.form > *:nth-child(n + 2) {
+  margin-top: 2rem;
+}

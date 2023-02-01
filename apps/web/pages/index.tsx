@@ -6,7 +6,7 @@ import {
   DateInput,
   Input,
   Snout,
-  SpacerForm,
+  Spacer,
 } from "ui";
 import "ui/normalize.css";
 import "ui/global.css";
@@ -44,51 +44,57 @@ export default function Web() {
 
   return (
     <Article>
-      <SpacerForm>
-        <Snout style={{ alignSelf: "center" }} />
+      <Spacer>
+        <Spacer variant="form">
+          <Snout style={{ alignSelf: "center" }} />
 
-        <Autocomplete label="Search" optionList={options} />
+          <Autocomplete label="Search" optionList={options} />
 
-        <Input
-          label="Name"
-          value={addInputNameValue}
-          onChange={nameOnChangeHandler}
-        />
+          <Input
+            label="Name"
+            value={addInputNameValue}
+            onChange={nameOnChangeHandler}
+          />
 
-        <Input
-          label="Calories"
-          value={addInputCaloriesValue}
-          onChange={caloriesOnChangeHandler}
-        />
+          <Input
+            label="Calories"
+            value={addInputCaloriesValue}
+            onChange={caloriesOnChangeHandler}
+          />
 
-        <DateInput label="Date" value={date} onChange={dateOnChangeHandler} />
+          <DateInput label="Date" value={date} onChange={dateOnChangeHandler} />
 
-        <Button>Submit</Button>
-      </SpacerForm>
+          <Button>Submit</Button>
+        </Spacer>
 
-      <Accordion summary="1.2.2022 - 942kcal">
-        <ul>
-          <li>Chicken McNugget</li>
-          <li>French Fries</li>
-          <li>Whopper</li>
-        </ul>
-      </Accordion>
-      <Accordion summary="2.2.2022 - 942kcal">
-        <ul>
-          <li>Chicken McNugget</li>
-          <li>French Fries</li>
-          <li>Whopper</li>
-        </ul>
-      </Accordion>
+        <div>
+          <Accordion summary="1.2.2022 - 942kcal">
+            <ul>
+              <li>Chicken McNugget</li>
+              <li>French Fries</li>
+              <li>Whopper</li>
+            </ul>
+          </Accordion>
+          <Accordion summary="2.2.2022 - 942kcal">
+            <ul>
+              <li>Chicken McNugget</li>
+              <li>French Fries</li>
+              <li>Whopper</li>
+            </ul>
+          </Accordion>
+        </div>
 
-      <h1>Foods</h1>
-      <ul>
-        {data.map((item: any) => (
-          <li key={item.name}>
-            {item.name} / {item.calories}
-          </li>
-        ))}
-      </ul>
+        <div>
+          <h2>Foods in database</h2>
+          <ul>
+            {data.map((item: any) => (
+              <li key={item.name}>
+                {item.name} / {item.calories}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Spacer>
     </Article>
   );
 }

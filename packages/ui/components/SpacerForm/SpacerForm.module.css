@@ -1,9 +1,0 @@
-.root {
-  display: flex;
-  align-items: stretch;
-  flex-direction: column;
-}
-
-.root > *:nth-child(n + 2) {
-  margin-top: 2rem;
-}
