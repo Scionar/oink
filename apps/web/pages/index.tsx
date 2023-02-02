@@ -39,6 +39,12 @@ export default function Web() {
     setDate(event.currentTarget.value);
   };
 
+  const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(event.currentTarget.foodName.value, "name");
+    console.log(event.currentTarget.calories.value, "calories");
+  };
+
   const autocompleteOptionList = useMemo(() => {
     if (!data) return [];
 
@@ -55,27 +61,39 @@ export default function Web() {
   return (
     <Article>
       <Spacer>
-        <Spacer variant="form">
-          <Snout style={{ alignSelf: "center" }} />
+        <form onSubmit={onSubmitHandler}>
+          <Spacer variant="form">
+            <Snout style={{ alignSelf: "center" }} />
 
-          <Autocomplete label="Search" optionList={autocompleteOptionList} />
+            <Autocomplete label="Search" optionList={autocompleteOptionList} />
 
-          <Input
-            label="Name"
-            value={addInputNameValue}
-            onChange={nameOnChangeHandler}
-          />
+            <Input
+              label="Name"
+              value={addInputNameValue}
+              name="foodName"
+              onChange={nameOnChangeHandler}
+            />
 
-          <Input
-            label="Calories"
-            value={addInputCaloriesValue}
-            onChange={caloriesOnChangeHandler}
-          />
+            <Input
+              label="Calories"
+              value={addInputCaloriesValue}
+              name="calories"
+              type="number"
+              onChange={caloriesOnChangeHandler}
+            />
 
-          <DateInput label="Date" value={date} onChange={dateOnChangeHandler} />
+            <DateInput
+              label="Date"
+              value={date}
+              name="date"
+              onChange={dateOnChangeHandler}
+            />
 
-          <Button>Submit</Button>
-        </Spacer>
+            <Button variant="positive" type="submit">
+              Submit
+            </Button>
+          </Spacer>
+        </form>
 
         <div>
           <Accordion summary="1.2.2022 - 942kcal">

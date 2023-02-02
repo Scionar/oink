@@ -6,9 +6,10 @@ type DateInputProps = {
   label: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   value: string;
+  name: string;
 };
 
-export const DateInput = ({ label, value, onChange }: DateInputProps) => {
+export const DateInput = ({ label, value, name, onChange }: DateInputProps) => {
   return (
     <div className={styles.container}>
       <Label>{label}</Label>
@@ -17,6 +18,7 @@ export const DateInput = ({ label, value, onChange }: DateInputProps) => {
         value={value}
         onChange={onChange}
         type="date"
+        name={name}
       />
     </div>
   );
