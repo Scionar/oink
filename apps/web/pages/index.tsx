@@ -11,7 +11,9 @@ import {
 import "ui/normalize.css";
 import "ui/global.css";
 import useSWR from "swr";
+import useSWRMutation from "swr/mutation";
 import { ChangeEvent, useMemo, useState } from "react";
+import { swrPostFetcher } from "../helpers";
 
 const options = [
   { name: "Chicken McNugget", calories: 48, id: "mcnugget" },
@@ -22,6 +24,10 @@ const options = [
 
 export default function Web() {
   const { data, error, isLoading } = useSWR(`http://localhost:3001/foods`);
+  const { trigger } = useSWRMutation(
+    "http://localhost:3001/foods",
+    swrPostFetcher
+  );
   const [addInputNameValue, setAddInputNameValue] = useState<string>("");
   const [addInputCaloriesValue, setAddInputCaloriesValue] =
     useState<string>("");
@@ -39,10 +45,15 @@ export default function Web() {
     setDate(event.currentTarget.value);
   };
 
-  const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(event.currentTarget.foodName.value, "name");
     console.log(event.currentTarget.calories.value, "calories");
+
+    await trigger({
+      name: event.currentTarget.foodName.value,
+      calories: Number.parseInt(event.currentTarget.calories.value),
+    });
   };
 
   const autocompleteOptionList = useMemo(() => {
