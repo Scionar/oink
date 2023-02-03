@@ -7,7 +7,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from "@nestjs/common";
-import { FoodDto } from "./dto";
+import { CreateFoodDto } from "./dto";
 import { FoodsService } from "./foods.service";
 
 @Controller("foods")
@@ -21,7 +21,7 @@ export class FoodsController {
 
   @Post()
   @UsePipes(new ValidationPipe({ transform: true }))
-  create(@Body() dto: FoodDto) {
+  create(@Body() dto: CreateFoodDto) {
     this.foodService.create(dto.name, dto.calories);
   }
 

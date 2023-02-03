@@ -1,1 +1,1 @@
-export * from "./food.dto";
+export * from "./create-food.dto";

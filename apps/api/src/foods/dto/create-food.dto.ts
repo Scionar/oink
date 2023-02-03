@@ -1,6 +1,6 @@
 import { IsDefined, IsInt, IsString } from "class-validator";
 
-export class FoodDto {
+export class CreateFoodDto {
   @IsString()
   @IsDefined()
   name: string;
