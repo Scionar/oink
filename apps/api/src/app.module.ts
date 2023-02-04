@@ -6,6 +6,8 @@ import { FoodsService } from "./foods/foods.service";
 import { FoodsModule } from "./foods/foods.module";
 import { PrismaModule } from "./prisma/prisma.module";
 import { ConfigModule } from "@nestjs/config";
+import { ConsumptionService } from './consumption/consumption.service';
+import { ConsumptionModule } from './consumption/consumption.module';
 
 @Module({
   imports: [
@@ -14,8 +16,9 @@ import { ConfigModule } from "@nestjs/config";
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    ConsumptionModule,
   ],
   controllers: [AppController, FoodsController],
-  providers: [AppService, FoodsService],
+  providers: [AppService, FoodsService, ConsumptionService],
 })
 export class AppModule {}
