@@ -8,8 +8,32 @@ datasource db {
 }
 
 model Food {
+  id          Int           @id @default(autoincrement())
+  createdAt   DateTime      @default(now())
+  name        String
+  calories    Int?
+  Consumption Consumption[]
+}
+
+model User {
+  id          Int           @id @default(autoincrement())
+  createdAt   DateTime      @default(now())
+  email       String        @unique
+  name        String?
+  role        Role          @default(USER)
+  Consumption Consumption[]
+}
+
+model Consumption {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
-  name      String
-  calories  Int?
+  foodId    Int
+  food      Food     @relation(fields: [foodId], references: [id])
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+enum Role {
+  USER
+  ADMIN
 }
