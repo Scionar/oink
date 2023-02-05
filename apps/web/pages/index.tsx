@@ -25,7 +25,7 @@ const options = [
 export default function Web() {
   const { data, error, isLoading } = useSWR(`http://localhost:3001/foods`);
   const { trigger } = useSWRMutation(
-    "http://localhost:3001/foods",
+    "http://localhost:3001/consumption",
     swrPostFetcher
   );
   const [addInputNameValue, setAddInputNameValue] = useState<string>("");
@@ -51,8 +51,9 @@ export default function Web() {
     console.log(event.currentTarget.calories.value, "calories");
 
     await trigger({
-      name: event.currentTarget.foodName.value,
+      foodName: event.currentTarget.foodName.value,
       calories: Number.parseInt(event.currentTarget.calories.value),
+      userId: 1,
     });
   };
 

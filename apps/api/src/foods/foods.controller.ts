@@ -7,16 +7,12 @@ import {
   UsePipes,
   ValidationPipe,
 } from "@nestjs/common";
-import { ConsumptionService } from "../consumption/consumption.service";
 import { CreateFoodDto } from "./dto";
 import { FoodsService } from "./foods.service";
 
 @Controller("foods")
 export class FoodsController {
-  constructor(
-    private foodService: FoodsService,
-    private consumptionService: ConsumptionService
-  ) {}
+  constructor(private foodService: FoodsService) {}
 
   @Get()
   findAll() {
@@ -26,8 +22,7 @@ export class FoodsController {
   @Post()
   @UsePipes(new ValidationPipe({ transform: true }))
   async create(@Body() dto: CreateFoodDto) {
-    const food = await this.foodService.create(dto.name, dto.calories);
-    await this.consumptionService.create(1, food.id);
+    await this.foodService.create(dto.name, dto.calories);
   }
 
   @Get(":id")
