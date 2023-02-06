@@ -1,4 +1,5 @@
 .button {
+  appearance: none;
   padding: 1rem;
   border: 1px solid var(--color-gray);
   border-radius: 0.5rem;
@@ -8,6 +9,14 @@
 
 .button:active {
   background-color: var(--color-gray);
+}
+
+.button:focus,
+.button:focus-within {
+  outline: var(--theme-focus-color) solid 2px;
+  outline-offset: var(--theme-input-focus-ring-offset);
+  position: relative;
+  z-index: 1;
 }
 
 button.positive {

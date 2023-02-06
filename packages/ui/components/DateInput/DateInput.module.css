@@ -15,7 +15,7 @@
 
 .input:focus {
   outline: var(--theme-focus-color) solid 2px;
-  outline-offset: 0.1rem;
+  outline-offset: var(--theme-input-focus-ring-offset);
   position: relative;
   z-index: 1;
 }
