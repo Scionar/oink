@@ -4,6 +4,7 @@ import {
   Autocomplete,
   Button,
   DateInput,
+  Divider,
   Input,
   Snout,
   Spacer,
@@ -82,6 +83,8 @@ export default function Web() {
             <Snout style={{ alignSelf: "center" }} />
 
             <Autocomplete label="Search" optionList={autocompleteOptionList} />
+
+            <Divider name="OR" />
 
             <Input
               label="Name"

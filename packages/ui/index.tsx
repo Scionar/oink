@@ -8,3 +8,4 @@ export * from "./components/Input/Input";
 export * from "./components/Spacer/Spacer";
 export * from "./components/DateInput/DateInput";
 export * from "./components/Accordion/Accordion";
+export * from "./components/Divider/Divider";

@@ -1,0 +1,21 @@
+.divider {
+  display: flex;
+  flex-direction: row;
+  border: 0;
+  box-sizing: border-box;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.line {
+  display: inline-block;
+  border: 1px solid var(--color-gray);
+  flex-grow: 1;
+  height: 0px;
+}
+
+.name {
+  display: inline-block;
+  margin: 0 1rem;
+}
