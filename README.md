@@ -22,7 +22,7 @@ PRISMA_DATABASE_URL_WITH_SCHEMA=${PRISMA_DATABASE_URL}?schema=public
 **/apps/web/.env**
 
 ```
-API_URL=http://localhost:3001
+NEXT_PUBLIC_API_URL=http://localhost:3001
 ```
 
 ## Develop

@@ -23,9 +23,11 @@ const options = [
 ] as any;
 
 export default function Web() {
-  const { data, error, isLoading } = useSWR(`http://localhost:3001/foods`);
+  const { data, error, isLoading } = useSWR(
+    `${process.env.NEXT_PUBLIC_API_URL}/foods`
+  );
   const { trigger } = useSWRMutation(
-    "http://localhost:3001/consumption",
+    `${process.env.NEXT_PUBLIC_API_URL}/consumption`,
     swrPostFetcher
   );
   const [addInputNameValue, setAddInputNameValue] = useState<string>("");
