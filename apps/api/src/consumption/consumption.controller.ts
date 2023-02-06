@@ -33,6 +33,6 @@ export class ConsumptionController {
       );
     }
 
-    await this.consumptionService.create(dto.userId, food.id);
+    await this.consumptionService.create(dto.userId, food.id, dto.date);
   }
 }

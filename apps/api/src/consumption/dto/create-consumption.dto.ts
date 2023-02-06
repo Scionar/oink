@@ -12,4 +12,7 @@ export class CreateConsumptionDto {
   @IsInt()
   @IsDefined()
   userId: number;
+
+  @IsString()
+  date: string;
 }

@@ -51,11 +51,13 @@ export default function Web() {
     event.preventDefault();
     console.log(event.currentTarget.foodName.value, "name");
     console.log(event.currentTarget.calories.value, "calories");
+    console.log(event.currentTarget.date.value, "date");
 
     await trigger({
       foodName: event.currentTarget.foodName.value,
       calories: Number.parseInt(event.currentTarget.calories.value),
       userId: 1,
+      date: event.currentTarget.date.value,
     });
   };
 

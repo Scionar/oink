@@ -5,11 +5,12 @@ import { PrismaService } from "../prisma/prisma.service";
 export class ConsumptionService {
   constructor(private prisma: PrismaService) {}
 
-  async create(userId: number, foodId: number) {
+  async create(userId: number, foodId: number, date: string) {
     const consumption = await this.prisma.consumption.create({
       data: {
         foodId,
         userId,
+        createdAt: date ? new Date(date) : undefined,
       },
     });
 
