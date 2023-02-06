@@ -3,3 +3,9 @@
   font-weight: var(--theme-input-label-weight);
   font-size: var(--theme-input-label-size);
 }
+
+.required::after {
+  display: inline-block;
+  content: "*";
+  color: var(--theme-input-attention);
+}

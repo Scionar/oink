@@ -85,6 +85,7 @@ export default function Web() {
               label="Name"
               value={addInputNameValue}
               name="foodName"
+              required
               onChange={nameOnChangeHandler}
             />
 
@@ -93,6 +94,7 @@ export default function Web() {
               value={addInputCaloriesValue}
               name="calories"
               type="number"
+              required
               onChange={caloriesOnChangeHandler}
             />
 

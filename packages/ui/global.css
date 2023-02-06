@@ -15,6 +15,7 @@
   --theme-input-label-size: 100%;
   --theme-input-label-weight: bold;
   --theme-input-label-color: var(--color-black);
+  --theme-input-attention: #f70776;
 
   --breakpoint-sm: 0;
   --breakpoint-md: 60rem; /* 600px */
