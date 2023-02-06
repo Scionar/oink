@@ -26,7 +26,7 @@ export default function Web() {
   const { data, error, isLoading } = useSWR(
     `${process.env.NEXT_PUBLIC_API_URL}/foods`
   );
-  const { trigger } = useSWRMutation(
+  const { trigger, isMutating } = useSWRMutation(
     `${process.env.NEXT_PUBLIC_API_URL}/consumption`,
     swrPostFetcher
   );
@@ -103,7 +103,7 @@ export default function Web() {
               onChange={dateOnChangeHandler}
             />
 
-            <Button variant="positive" type="submit">
+            <Button variant="positive" type="submit" disabled={isMutating}>
               Submit
             </Button>
           </Spacer>
