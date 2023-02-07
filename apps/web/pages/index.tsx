@@ -14,6 +14,7 @@ import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import { ChangeEvent, useMemo, useState } from "react";
 import { swrPostFetcher } from "../helpers";
+import { compareDesc, format, parse, parseISO } from "date-fns";
 
 const options = [
   { name: "Chicken McNugget", calories: 48, id: "mcnugget" },
@@ -28,8 +29,15 @@ export type AutocompleteOption = {
   id: string;
 };
 
+type ResponseType = {
+  id: number;
+  createdAt: string;
+  calories: number;
+  name: string;
+}[];
+
 export default function Web() {
-  const { data, error, isLoading } = useSWR(
+  const { data, error, isLoading } = useSWR<ResponseType>(
     `${process.env.NEXT_PUBLIC_API_URL}/foods`
   );
   const { trigger, isMutating } = useSWRMutation(
@@ -78,6 +86,54 @@ export default function Web() {
     }));
   }, [data]);
 
+  const dateList = useMemo(() => {
+    if (!data) return [];
+
+    const groupedData = data.reduce(
+      (
+        groups: {
+          [n: string]: { date: string; calSummary: number; consumptions: any };
+        },
+        consumption: ResponseType[number]
+      ) => {
+        const dateFormat = format(
+          parseISO(consumption.createdAt),
+          "dd.MM.yyyy"
+        );
+        if (!groups[dateFormat]) {
+          groups[dateFormat] = {
+            date: dateFormat,
+            calSummary: 0,
+            consumptions: [],
+          };
+        }
+        groups[dateFormat].consumptions.push(consumption);
+        return groups;
+      },
+      {}
+    );
+
+    const toArray = Object.values(groupedData);
+
+    const calcCalSummaries = toArray.map((day) => ({
+      ...day,
+      calSummary: day.consumptions.reduce(
+        (sum: number, consumption: ResponseType[number]) =>
+          sum + consumption.calories,
+        0
+      ),
+    }));
+
+    const sortedData = calcCalSummaries.sort((a, b) =>
+      compareDesc(
+        parse(a.date, "dd.MM.yyyy", new Date()),
+        parse(b.date, "dd.MM.yyyy", new Date())
+      )
+    );
+
+    return sortedData;
+  }, [data]);
+
   if (isLoading) return <div>Loading...</div>;
   if (!data || error) return <div>Failed</div>;
 
@@ -119,31 +175,22 @@ export default function Web() {
         </form>
 
         <div>
-          <Accordion summary="1.2.2022 - 942kcal">
-            <ul>
-              <li>Chicken McNugget</li>
-              <li>French Fries</li>
-              <li>Whopper</li>
-            </ul>
-          </Accordion>
-          <Accordion summary="2.2.2022 - 942kcal">
-            <ul>
-              <li>Chicken McNugget</li>
-              <li>French Fries</li>
-              <li>Whopper</li>
-            </ul>
-          </Accordion>
-        </div>
-
-        <div>
-          <h2>Foods in database</h2>
-          <ul>
-            {data.map((item: any) => (
-              <li key={item.name}>
-                {item.name} / {item.calories}
-              </li>
-            ))}
-          </ul>
+          {dateList.map((day) => {
+            return (
+              <Accordion
+                summary={`${day.date} - ${day.calSummary} kcal`}
+                key={day.date}
+              >
+                <ul>
+                  {day.consumptions.map((consumption: any) => (
+                    <li key={consumption.id}>
+                      {consumption.name} - {consumption.calories} kcal
+                    </li>
+                  ))}
+                </ul>
+              </Accordion>
+            );
+          })}
         </div>
       </Spacer>
     </Article>
