@@ -4,7 +4,6 @@ import {
   Autocomplete,
   Button,
   DateInput,
-  Divider,
   Input,
   Snout,
   Spacer,
@@ -23,6 +22,12 @@ const options = [
   { name: "Hawaiian Pizza", calories: 154, id: "hawaiian-pizza" },
 ] as any;
 
+export type AutocompleteOption = {
+  name: string;
+  calories: string;
+  id: string;
+};
+
 export default function Web() {
   const { data, error, isLoading } = useSWR(
     `${process.env.NEXT_PUBLIC_API_URL}/foods`
@@ -31,14 +36,9 @@ export default function Web() {
     `${process.env.NEXT_PUBLIC_API_URL}/consumption`,
     swrPostFetcher
   );
-  const [addInputNameValue, setAddInputNameValue] = useState<string>("");
   const [addInputCaloriesValue, setAddInputCaloriesValue] =
     useState<string>("");
   const [date, setDate] = useState<string>("");
-
-  const nameOnChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setAddInputNameValue(event.currentTarget.value);
-  };
 
   const caloriesOnChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setAddInputCaloriesValue(event.currentTarget.value);
@@ -46,6 +46,12 @@ export default function Web() {
 
   const dateOnChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setDate(event.currentTarget.value);
+  };
+
+  const autocompleteChangeHandler = (
+    option: AutocompleteOption | null | undefined
+  ) => {
+    !!option && setAddInputCaloriesValue(option?.calories);
   };
 
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -82,16 +88,12 @@ export default function Web() {
           <Spacer variant="form">
             <Snout style={{ alignSelf: "center" }} />
 
-            <Autocomplete label="Search" optionList={autocompleteOptionList} />
-
-            <Divider name="OR" />
-
-            <Input
+            <Autocomplete
               label="Name"
-              value={addInputNameValue}
               name="foodName"
+              optionList={autocompleteOptionList}
               required
-              onChange={nameOnChangeHandler}
+              onSelectedItemChange={autocompleteChangeHandler}
             />
 
             <Input
