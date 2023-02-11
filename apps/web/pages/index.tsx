@@ -14,8 +14,9 @@ import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import { ChangeEvent, useMemo, useState } from "react";
 import { swrPostFetcher } from "../helpers";
-import { compareDesc, format, parse, parseISO } from "date-fns";
 import { Food } from "database";
+import { formatDayData } from "../helpers/formatDayData";
+import { RecursivelyConvertDatesToStrings } from "../helpers/RecursivelyConvertDatesToStrings";
 
 const options = [
   { name: "Chicken McNugget", calories: 48, id: "mcnugget" },
@@ -31,9 +32,9 @@ export type AutocompleteOption = {
 };
 
 export default function Web() {
-  const { data, error, isLoading } = useSWR<Food[]>(
-    `${process.env.NEXT_PUBLIC_API_URL}/foods`
-  );
+  const { data, error, isLoading } = useSWR<
+    RecursivelyConvertDatesToStrings<Food[]>
+  >(`${process.env.NEXT_PUBLIC_API_URL}/foods`);
   const { trigger, isMutating } = useSWRMutation(
     `${process.env.NEXT_PUBLIC_API_URL}/consumption`,
     swrPostFetcher
@@ -80,52 +81,7 @@ export default function Web() {
     }));
   }, [data]);
 
-  const dateList = useMemo(() => {
-    if (!data) return [];
-
-    const groupedData = data.reduce(
-      (
-        groups: {
-          [n: string]: { date: string; calSummary: number; consumptions: any };
-        },
-        consumption
-      ) => {
-        const dateFormat = format(
-          parseISO(consumption.createdAt as unknown as string),
-          "dd.MM.yyyy"
-        );
-        if (!groups[dateFormat]) {
-          groups[dateFormat] = {
-            date: dateFormat,
-            calSummary: 0,
-            consumptions: [],
-          };
-        }
-        groups[dateFormat].consumptions.push(consumption);
-        return groups;
-      },
-      {}
-    );
-
-    const toArray = Object.values(groupedData);
-
-    const calcCalSummaries = toArray.map((day) => ({
-      ...day,
-      calSummary: day.consumptions.reduce(
-        (sum: number, consumption: any) => sum + consumption.calories,
-        0
-      ),
-    }));
-
-    const sortedData = calcCalSummaries.sort((a, b) =>
-      compareDesc(
-        parse(a.date, "dd.MM.yyyy", new Date()),
-        parse(b.date, "dd.MM.yyyy", new Date())
-      )
-    );
-
-    return sortedData;
-  }, [data]);
+  const dateList = useMemo(() => formatDayData(data), [data]);
 
   if (isLoading) return <div>Loading...</div>;
   if (!data || error) return <div>Failed</div>;
