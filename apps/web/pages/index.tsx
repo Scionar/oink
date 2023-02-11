@@ -32,12 +32,18 @@ export type AutocompleteOption = {
 };
 
 export default function Web() {
-  const { data, error, isLoading } = useSWR<
+  const { data, error, isLoading, mutate } = useSWR<
     RecursivelyConvertDatesToStrings<Food[]>
   >(`${process.env.NEXT_PUBLIC_API_URL}/foods`);
+
   const { trigger, isMutating } = useSWRMutation(
     `${process.env.NEXT_PUBLIC_API_URL}/consumption`,
-    swrPostFetcher
+    swrPostFetcher,
+    {
+      onSuccess: () => {
+        mutate();
+      },
+    }
   );
   const [addInputCaloriesValue, setAddInputCaloriesValue] =
     useState<string>("");
