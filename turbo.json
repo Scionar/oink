@@ -3,7 +3,7 @@
   "globalEnv": ["NEXT_PUBLIC_API_URL"],
   "pipeline": {
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^db:generate"],
       "outputs": ["dist/**", ".next/**"]
     },
     "lint": {
@@ -13,6 +13,13 @@
       "outputs": []
     },
     "dev": {
+      "dependsOn": ["^db:generate", "^build"],
+      "cache": false
+    },
+    "db:generate": {
+      "cache": false
+    },
+    "db:push": {
       "cache": false
     }
   }

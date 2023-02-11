@@ -6,7 +6,7 @@ Anti-fitness app.
 
 Create next files with credentials, URLs and ports of your desire.
 
-**/apps/api/.env**
+**/packages/database/.env**
 
 ```
 POSTGRES_URL=localhost
