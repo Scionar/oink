@@ -15,6 +15,7 @@ import useSWRMutation from "swr/mutation";
 import { ChangeEvent, useMemo, useState } from "react";
 import { swrPostFetcher } from "../helpers";
 import { compareDesc, format, parse, parseISO } from "date-fns";
+import { Food } from "database";
 
 const options = [
   { name: "Chicken McNugget", calories: 48, id: "mcnugget" },
@@ -29,15 +30,8 @@ export type AutocompleteOption = {
   id: string;
 };
 
-type ResponseType = {
-  id: number;
-  createdAt: string;
-  calories: number;
-  name: string;
-}[];
-
 export default function Web() {
-  const { data, error, isLoading } = useSWR<ResponseType>(
+  const { data, error, isLoading } = useSWR<Food[]>(
     `${process.env.NEXT_PUBLIC_API_URL}/foods`
   );
   const { trigger, isMutating } = useSWRMutation(
@@ -94,10 +88,10 @@ export default function Web() {
         groups: {
           [n: string]: { date: string; calSummary: number; consumptions: any };
         },
-        consumption: ResponseType[number]
+        consumption
       ) => {
         const dateFormat = format(
-          parseISO(consumption.createdAt),
+          parseISO(consumption.createdAt as unknown as string),
           "dd.MM.yyyy"
         );
         if (!groups[dateFormat]) {
@@ -118,8 +112,7 @@ export default function Web() {
     const calcCalSummaries = toArray.map((day) => ({
       ...day,
       calSummary: day.consumptions.reduce(
-        (sum: number, consumption: ResponseType[number]) =>
-          sum + consumption.calories,
+        (sum: number, consumption: any) => sum + consumption.calories,
         0
       ),
     }));
