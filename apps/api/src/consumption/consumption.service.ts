@@ -5,6 +5,14 @@ import { PrismaService } from "../prisma/prisma.service";
 export class ConsumptionService {
   constructor(private prisma: PrismaService) {}
 
+  async findAll() {
+    return await this.prisma.consumption.findMany({
+      include: {
+        food: true,
+      },
+    });
+  }
+
   async create(userId: number, foodId: number, date: string) {
     const consumption = await this.prisma.consumption.create({
       data: {

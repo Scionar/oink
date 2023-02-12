@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Delete,
+  Get,
   HttpException,
   HttpStatus,
   Post,
@@ -19,6 +20,11 @@ export class ConsumptionController {
     private consumptionService: ConsumptionService,
     private foodService: FoodsService
   ) {}
+
+  @Get()
+  findAll() {
+    return this.consumptionService.findAll();
+  }
 
   @Post()
   @UsePipes(new ValidationPipe({ transform: true }))
