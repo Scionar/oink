@@ -4,7 +4,6 @@
   margin: 0;
   margin-bottom: -1px;
   transition: margin 0.1s, border-radius 1s;
-  overflow: hidden;
 }
 
 .accordion[open] {
@@ -34,6 +33,13 @@
 .summaryWrapper {
   display: flex;
   flex-direction: row;
+}
+
+.summaryWrapper:focus {
+  outline: var(--theme-focus-color) solid 2px;
+  outline-offset: var(--theme-input-focus-ring-offset);
+  position: relative;
+  z-index: 1;
 }
 
 .summaryWrapper::marker, /* Latest Chrome, Edge, Firefox */ 
@@ -83,6 +89,7 @@
 }
 
 .content {
+  border-radius: var(--theme-input-border-radius);
   overflow: hidden;
 }
 
