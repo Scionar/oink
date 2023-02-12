@@ -14,18 +14,18 @@ export const Accordion = ({ children, summary }: AccordionProps) => {
     setIsExpanded(!isExpanded);
   };
 
-  const toggleButtonClasses = [styles.toggleButton];
-
   return (
-    <div className={styles.accordion}>
-      <div className={styles.summaryWrapper}>
+    <div
+      className={clsx({
+        [styles.accordion]: true,
+        [styles.accordionExpanded]: isExpanded,
+      })}
+    >
+      <div className={styles.summaryWrapper} onClick={toggleOnClickHandler}>
         <p className={styles.summary}>{summary}</p>
         <div className={styles.toggleWrapper}>
           <button
-            className={clsx({
-              [styles.toggleButton]: true,
-              [styles.toggleButtonExpanded]: isExpanded,
-            })}
+            className={styles.toggleButton}
             onClick={toggleOnClickHandler}
           >
             &#10148;

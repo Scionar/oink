@@ -1,33 +1,67 @@
 .accordion {
-  border-bottom: 1px solid var(--color-black);
-  border-top: 1px solid var(--color-black);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray-scale-40);
   margin-bottom: -1px;
+}
+
+.accordionExpanded {
+  background-color: var(--color-gray-scale-90);
+}
+
+.accordion:first-child {
+  border-top-left-radius: var(--theme-input-border-radius);
+  border-top-right-radius: var(--theme-input-border-radius);
+}
+
+.accordion:last-of-type {
+  border-bottom-left-radius: var(--theme-input-border-radius);
+  border-bottom-right-radius: var(--theme-input-border-radius);
 }
 
 .summaryWrapper {
   display: flex;
   flex-direction: row;
+  transition: height 0.5s;
+}
+
+.accordionExpanded .summaryWrapper {
+  border-bottom: 1px solid var(--color-gray-scale-70);
 }
 
 .summary {
   flex-grow: 1;
-  padding: 1rem;
+  padding: 2rem;
   margin: 0;
+}
+
+.accordionExpanded .summary {
+  font-weight: 600;
 }
 
 .toggleWrapper {
   flex-grow: auto;
+  display: flex;
 }
 
 .toggleButton {
   all: unset;
+  border-radius: var(--theme-input-border-radius);
   cursor: pointer;
-  padding: 1rem;
-  transform: rotate(0deg);
-  transition: transform 0.25s;
+  color: var(--color-gray-scale-50);
+  padding: 2rem;
+  transform: rotate(90deg);
+  transition: transform 0.5s;
 }
 
-.toggleButtonExpanded {
+.accordionExpanded .toggleButton {
+  color: var(--color-black);
+}
+
+.toggleButton:focus {
+  outline: var(--theme-focus-color) solid 2px;
+}
+
+.accordionExpanded .toggleButton {
   transform: rotate(-90deg);
 }
 

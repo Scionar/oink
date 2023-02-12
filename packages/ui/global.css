@@ -4,10 +4,18 @@
 
   /* Use https://chir.ag/projects/name-that-color/ */
 
+  --color-black: #000000;
+  --color-gray-scale-10: #181818;
+  --color-gray-scale-20: #303030;
+  --color-gray-scale-30: #484848;
+  --color-gray-scale-40: #606060;
+  --color-gray-scale-50: #808080; /* Center */
+  --color-gray-scale-60: #b0b0b0;
+  --color-gray-scale-70: #c8c8c8;
+  --color-gray-scale-80: #e0e0e0;
+  --color-gray-scale-90: #f8f8f8;
   --color-white: #ffffff;
   --color-gray: #808080;
-  --color-light-gray: #d3d3d3;
-  --color-black: #000000;
 
   --theme-focus-color: #4d90fe;
   --theme-input-focus-ring-offset: 0.1rem;
@@ -17,6 +25,9 @@
   --theme-input-label-weight: bold;
   --theme-input-label-color: var(--color-black);
   --theme-input-attention: #f70776;
+
+  --theme-disabled-background-color: var(--color-gray-scale-80);
+  --theme-disabled-font-color: var(--color-gray-scale-80);
 
   --breakpoint-sm: 0;
   --breakpoint-md: 60rem; /* 600px */

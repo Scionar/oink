@@ -37,7 +37,7 @@
 }
 
 .option:hover {
-  background-color: var(--color-gray);
+  background-color: var(--color-gray-scale-50);
 }
 
 .option:first-child {
