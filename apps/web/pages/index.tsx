@@ -33,6 +33,25 @@ export type AutocompleteOption = {
   id: string;
 };
 
+const tableColumns = [
+  { header: "Name", accessorKey: "name" },
+  { header: "Calories", accessorKey: "calories" },
+  {
+    accessorKey: " ",
+    cell: (props: any) => (
+      <div style={{ textAlign: "right" }}>
+        <Button
+          onClick={() => {
+            console.log(props.row.id);
+          }}
+        >
+          <IconTrash size={15} />
+        </Button>
+      </div>
+    ),
+  },
+];
+
 export default function Web() {
   const { data, error, isLoading, mutate } = useSWR<
     RecursivelyConvertDatesToStrings<Food[]>
@@ -133,43 +152,12 @@ export default function Web() {
 
         <div>
           {dateList.map((day) => {
-            const tableColumns = [
-              { accessorKey: "Name" },
-              { accessorKey: "Calories" },
-              {
-                accessorKey: " ",
-                cell: (props: any) => (
-                  <div style={{ textAlign: "right" }}>
-                    <Button
-                      onClick={() => {
-                        console.log(props.row.id);
-                      }}
-                    >
-                      <IconTrash size={15} />
-                    </Button>
-                  </div>
-                ),
-              },
-            ];
-
-            const tableData = [
-              { Name: "Muffin", Calories: 100, id: 1 },
-              { Name: "Muffin", Calories: 100, id: 1 },
-            ];
-
             return (
               <Accordion
                 summary={`${day.date} - ${day.calSummary} kcal`}
                 key={day.date}
               >
-                <Table columns={tableColumns} data={tableData} />
-                <ul>
-                  {day.consumptions.map((consumption: any) => (
-                    <li key={consumption.id}>
-                      {consumption.name} - {consumption.calories} kcal
-                    </li>
-                  ))}
-                </ul>
+                <Table columns={tableColumns} data={day.consumptions} />
               </Accordion>
             );
           })}
