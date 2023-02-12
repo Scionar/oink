@@ -7,7 +7,7 @@ type ButtonProps = {
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
   variant?: "positive";
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 export const Button = ({
