@@ -15,10 +15,11 @@ import "ui/global.css";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import { ChangeEvent, useMemo, useState } from "react";
-import { swrPostFetcher } from "../helpers";
-import { Food } from "database";
+import { swrDeleteFetcher, swrPostFetcher } from "../helpers";
+import { Consumption, Food } from "database";
 import { formatDayData } from "../helpers/formatDayData";
 import { RecursivelyConvertDatesToStrings } from "../helpers/RecursivelyConvertDatesToStrings";
+import { ConsumptionsResponseType } from "../types";
 
 const options = [
   { name: "Chicken McNugget", calories: 48, id: "mcnugget" },
@@ -33,30 +34,19 @@ export type AutocompleteOption = {
   id: string;
 };
 
-const tableColumns = [
-  { header: "Name", accessorKey: "name" },
-  { header: "Calories", accessorKey: "calories" },
-  {
-    accessorKey: " ",
-    accessorFn: (row: any) => row.id,
-    cell: (props: any) => (
-      <div style={{ textAlign: "right" }}>
-        <Button
-          onClick={() => {
-            console.log(props.getValue());
-          }}
-        >
-          <IconTrash size={15} />
-        </Button>
-      </div>
-    ),
-  },
-];
-
 export default function Web() {
   const { data, error, isLoading, mutate } = useSWR<
     RecursivelyConvertDatesToStrings<Food[]>
   >(`${process.env.NEXT_PUBLIC_API_URL}/foods`);
+
+  const {
+    data: dataConsumptions,
+    error: errorConsumptions,
+    isLoading: isLoadingConsumptions,
+    mutate: mutateConsumptions,
+  } = useSWR<ConsumptionsResponseType>(
+    `${process.env.NEXT_PUBLIC_API_URL}/consumption`
+  );
 
   const { trigger, isMutating } = useSWRMutation(
     `${process.env.NEXT_PUBLIC_API_URL}/consumption`,
@@ -64,9 +54,25 @@ export default function Web() {
     {
       onSuccess: () => {
         mutate();
+        mutateConsumptions();
       },
     }
   );
+
+  const {
+    trigger: triggerDeleteConsumption,
+    isMutating: isMutatingDeleteConsumption,
+  } = useSWRMutation(
+    `${process.env.NEXT_PUBLIC_API_URL}/consumption`,
+    swrDeleteFetcher,
+    {
+      onSuccess: () => {
+        mutate();
+        mutateConsumptions();
+      },
+    }
+  );
+
   const [addInputCaloriesValue, setAddInputCaloriesValue] =
     useState<string>("");
   const [date, setDate] = useState<string>("");
@@ -109,10 +115,38 @@ export default function Web() {
     }));
   }, [data]);
 
-  const dateList = useMemo(() => formatDayData(data), [data]);
+  const tableColumns = useMemo(() => {
+    return [
+      { header: "Name", accessorKey: "name" },
+      { header: "Calories", accessorKey: "calories" },
+      {
+        accessorKey: " ",
+        accessorFn: (row: any) => row.id,
+        cell: (props: any) => (
+          <div style={{ textAlign: "right" }}>
+            <Button
+              disabled={isMutatingDeleteConsumption}
+              onClick={async () => {
+                await triggerDeleteConsumption({ id: props.getValue() });
+              }}
+            >
+              <IconTrash size={15} />
+            </Button>
+          </div>
+        ),
+      },
+    ];
+  }, [triggerDeleteConsumption, isMutatingDeleteConsumption]);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (!data || error) return <div>Failed</div>;
+  const dateList = useMemo(
+    () => formatDayData(dataConsumptions),
+    [dataConsumptions]
+  );
+
+  if (isLoading || isLoadingConsumptions) return <div>Loading...</div>;
+  if (!data || !dataConsumptions || error || errorConsumptions) {
+    return <div>Failed</div>;
+  }
 
   return (
     <Article>

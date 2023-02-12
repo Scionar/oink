@@ -1,6 +1,5 @@
-import { Food } from "database";
 import { formatDayData } from "./formatDayData";
-import { RecursivelyConvertDatesToStrings } from "./RecursivelyConvertDatesToStrings";
+import { ConsumptionsResponseType } from "../types";
 
 describe("formatDayData", () => {
   it("returns empty array if no input given", () => {
@@ -9,12 +8,18 @@ describe("formatDayData", () => {
   });
 
   it("forms data for one day when one food given", () => {
-    const input: RecursivelyConvertDatesToStrings<Food[]> = [
+    const input: ConsumptionsResponseType = [
       {
         id: 1,
-        calories: 370,
+        foodId: 1,
         createdAt: "2023-02-04T20:32:12.634Z",
-        name: "Muffin",
+        food: {
+          id: 1,
+          calories: 370,
+          name: "Muffin",
+          createdAt: "2023-02-04T20:32:12.634Z",
+        },
+        userId: 1,
       },
     ];
 
@@ -34,18 +39,30 @@ describe("formatDayData", () => {
   });
 
   it("groups foods from same day", () => {
-    const input: RecursivelyConvertDatesToStrings<Food[]> = [
+    const input: ConsumptionsResponseType = [
       {
         id: 1,
-        calories: 370,
+        foodId: 1,
         createdAt: "2023-02-04T20:32:12.634Z",
-        name: "Muffin",
+        food: {
+          id: 1,
+          calories: 370,
+          name: "Muffin",
+          createdAt: "2023-02-04T20:32:12.634Z",
+        },
+        userId: 1,
       },
       {
         id: 2,
-        calories: 290,
+        foodId: 2,
         createdAt: "2023-02-04T18:32:12.634Z",
-        name: "Waffle",
+        food: {
+          id: 2,
+          calories: 290,
+          name: "Waffle",
+          createdAt: "2023-02-04T18:32:12.634Z",
+        },
+        userId: 1,
       },
     ];
 
@@ -70,18 +87,30 @@ describe("formatDayData", () => {
   });
 
   it("groups foods for different days days and order days desc", () => {
-    const input: RecursivelyConvertDatesToStrings<Food[]> = [
+    const input: ConsumptionsResponseType = [
       {
         id: 1,
-        calories: 370,
+        foodId: 1,
         createdAt: "2023-02-04T20:32:12.634Z",
-        name: "Muffin",
+        food: {
+          id: 1,
+          calories: 370,
+          name: "Muffin",
+          createdAt: "2023-02-04T20:32:12.634Z",
+        },
+        userId: 1,
       },
       {
         id: 2,
-        calories: 290,
+        foodId: 2,
         createdAt: "2023-02-05T18:32:12.634Z",
-        name: "Waffle",
+        food: {
+          id: 2,
+          calories: 290,
+          name: "Waffle",
+          createdAt: "2023-02-05T18:32:12.634Z",
+        },
+        userId: 1,
       },
     ];
 

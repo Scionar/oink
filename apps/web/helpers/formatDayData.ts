@@ -1,13 +1,10 @@
-import { Food } from "database";
 import { compareDesc, format, parse, parseISO } from "date-fns";
-import { RecursivelyConvertDatesToStrings } from "./RecursivelyConvertDatesToStrings";
+import { ConsumptionsResponseType } from "../types";
 
-export const formatDayData = (
-  foods?: RecursivelyConvertDatesToStrings<Food[]>
-) => {
-  if (!foods || !foods.length) return [];
+export const formatDayData = (consumptions?: ConsumptionsResponseType) => {
+  if (!consumptions || !consumptions.length) return [];
 
-  const groupedData = foods.reduce(
+  const groupedData = consumptions.reduce(
     (
       groups: {
         [n: string]: { date: string; calSummary: number; consumptions: any };
@@ -27,8 +24,8 @@ export const formatDayData = (
       }
       groups[dateFormat].consumptions.push({
         id: consumption.id,
-        calories: consumption.calories,
-        name: consumption.name,
+        calories: consumption.food.calories,
+        name: consumption.food.name,
       });
       return groups;
     },
