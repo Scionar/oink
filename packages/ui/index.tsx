@@ -10,4 +10,6 @@ export * from "./components/DateInput/DateInput";
 export * from "./components/Accordion/Accordion";
 export * from "./components/Divider/Divider";
 export * from "./components/Table/Table";
+export * from "./components/Backdrop/Backdrop";
+export * from "./components/Modal/Modal";
 export * from "./icons/IconTrash";

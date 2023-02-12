@@ -2,10 +2,12 @@ import {
   Accordion,
   Article,
   Autocomplete,
+  Backdrop,
   Button,
   DateInput,
   IconTrash,
   Input,
+  Modal,
   Snout,
   Spacer,
   Table,
@@ -35,6 +37,11 @@ export type AutocompleteOption = {
 };
 
 export default function Web() {
+  const [addInputCaloriesValue, setAddInputCaloriesValue] =
+    useState<string>("");
+  const [date, setDate] = useState<string>("");
+  const [showGraphModal, setShowGraphModal] = useState<boolean>(false);
+
   const { data, error, isLoading, mutate } = useSWR<
     RecursivelyConvertDatesToStrings<Food[]>
   >(`${process.env.NEXT_PUBLIC_API_URL}/foods`);
@@ -73,10 +80,6 @@ export default function Web() {
     }
   );
 
-  const [addInputCaloriesValue, setAddInputCaloriesValue] =
-    useState<string>("");
-  const [date, setDate] = useState<string>("");
-
   const caloriesOnChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setAddInputCaloriesValue(event.currentTarget.value);
   };
@@ -103,6 +106,14 @@ export default function Web() {
       userId: 1,
       date: event.currentTarget.date.value,
     });
+  };
+
+  const showGraphClickHandler = () => {
+    setShowGraphModal(!showGraphModal);
+  };
+
+  const closeModalHandler = () => {
+    setShowGraphModal(false);
   };
 
   const autocompleteOptionList = useMemo(() => {
@@ -149,55 +160,71 @@ export default function Web() {
   }
 
   return (
-    <Article>
-      <Spacer>
-        <form onSubmit={onSubmitHandler}>
-          <Spacer variant="form">
-            <Snout style={{ alignSelf: "center" }} />
+    <>
+      {showGraphModal && (
+        <Backdrop>
+          <Modal closeHandler={closeModalHandler}>
+            <Spacer>
+              <p>Test content</p>
+            </Spacer>
+          </Modal>
+        </Backdrop>
+      )}
 
-            <Autocomplete
-              label="Name"
-              name="foodName"
-              optionList={autocompleteOptionList}
-              required
-              onSelectedItemChange={autocompleteChangeHandler}
-            />
+      <Article>
+        <Spacer>
+          <form onSubmit={onSubmitHandler}>
+            <Spacer variant="form">
+              <Snout style={{ alignSelf: "center" }} />
 
-            <Input
-              label="Calories"
-              value={addInputCaloriesValue}
-              name="calories"
-              type="number"
-              required
-              onChange={caloriesOnChangeHandler}
-            />
+              <Autocomplete
+                label="Name"
+                name="foodName"
+                optionList={autocompleteOptionList}
+                required
+                onSelectedItemChange={autocompleteChangeHandler}
+              />
 
-            <DateInput
-              label="Date"
-              value={date}
-              name="date"
-              onChange={dateOnChangeHandler}
-            />
+              <Input
+                label="Calories"
+                value={addInputCaloriesValue}
+                name="calories"
+                type="number"
+                required
+                onChange={caloriesOnChangeHandler}
+              />
 
-            <Button variant="positive" type="submit" disabled={isMutating}>
-              Submit
-            </Button>
-          </Spacer>
-        </form>
+              <DateInput
+                label="Date"
+                value={date}
+                name="date"
+                onChange={dateOnChangeHandler}
+              />
 
-        <div>
-          {dateList.map((day) => {
-            return (
-              <Accordion
-                summary={`${day.date} - ${day.calSummary} kcal`}
-                key={day.date}
-              >
-                <Table columns={tableColumns} data={day.consumptions} />
-              </Accordion>
-            );
-          })}
-        </div>
-      </Spacer>
-    </Article>
+              <Button variant="positive" type="submit" disabled={isMutating}>
+                Submit
+              </Button>
+            </Spacer>
+          </form>
+
+          <div>
+            <Button onClick={showGraphClickHandler}>Show graph</Button>
+          </div>
+
+          <div>
+            {dateList.map((day) => {
+              return (
+                <Accordion
+                  summary={`${day.date} - ${day.calSummary} kcal`}
+                  key={day.date}
+                >
+                  <Table columns={tableColumns} data={day.consumptions} />
+                </Accordion>
+              );
+            })}
+          </div>
+        </Spacer>
+      </Article>
+    </>
   );
 }
