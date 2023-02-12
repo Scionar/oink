@@ -5,6 +5,8 @@
   border-radius: 0.5rem;
   background-color: var(--color-gray-scale-80);
   color: var(--color-black);
+  display: inline-flex;
+  justify-content: center;
 }
 
 .button:active {
