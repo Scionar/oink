@@ -38,11 +38,12 @@ const tableColumns = [
   { header: "Calories", accessorKey: "calories" },
   {
     accessorKey: " ",
+    accessorFn: (row: any) => row.id,
     cell: (props: any) => (
       <div style={{ textAlign: "right" }}>
         <Button
           onClick={() => {
-            console.log(props.row.id);
+            console.log(props.getValue());
           }}
         >
           <IconTrash size={15} />
