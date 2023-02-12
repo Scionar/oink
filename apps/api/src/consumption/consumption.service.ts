@@ -18,4 +18,16 @@ export class ConsumptionService {
 
     return consumption;
   }
+
+  async delete(id: number) {
+    const consumption = await this.prisma.consumption.delete({
+      where: {
+        id,
+      },
+    });
+
+    console.log("Consumption delete", consumption);
+
+    return consumption;
+  }
 }

@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   HttpException,
   HttpStatus,
   Post,
@@ -10,7 +11,7 @@ import {
 import { Food } from "@prisma/client";
 import { FoodsService } from "../foods/foods.service";
 import { ConsumptionService } from "./consumption.service";
-import { CreateConsumptionDto } from "./dto";
+import { CreateConsumptionDto, DeleteConsumptionDto } from "./dto";
 
 @Controller("consumption")
 export class ConsumptionController {
@@ -34,5 +35,11 @@ export class ConsumptionController {
     }
 
     await this.consumptionService.create(dto.userId, food.id, dto.date);
+  }
+
+  @Delete()
+  @UsePipes(new ValidationPipe({ transform: true }))
+  async delete(@Body() dto: DeleteConsumptionDto) {
+    await this.consumptionService.delete(dto.id);
   }
 }
