@@ -20,6 +20,8 @@
 }
 
 .optionList {
+  border-radius: var(--theme-input-border-radius);
+  box-shadow: 0px 0px 10px var(--color-gray-scale-70);
   list-style: none;
   width: 100%;
   padding: 0;
@@ -31,22 +33,23 @@
 
 .option {
   background-color: var(--color-white);
-  border: 1px solid var(--theme-border-color);
+  border-left: 1px solid var(--theme-border-color);
+  border-right: 1px solid var(--theme-border-color);
   padding: 1rem;
-  border-bottom: none;
 }
 
 .option:hover {
-  background-color: var(--color-gray-scale-50);
+  background-color: var(--color-gray-scale-80);
 }
 
 .option:first-child {
+  border-top: 1px solid var(--theme-border-color);
   border-top-left-radius: var(--theme-input-border-radius);
   border-top-right-radius: var(--theme-input-border-radius);
 }
 
 .option:last-child {
+  border-bottom: 1px solid var(--theme-border-color);
   border-bottom-left-radius: var(--theme-input-border-radius);
   border-bottom-right-radius: var(--theme-input-border-radius);
-  border-bottom: 1px solid var(--theme-border-color);
 }
