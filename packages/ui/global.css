@@ -41,7 +41,7 @@ html {
 }
 
 body {
-  background-color: var(--color-white);
+  background-color: #f8fafc;
   color: var(--primary-color);
   font-family: "Inter", sans-serif;
   font-size: 1.6rem; /* Use 16px font size, as a base font size */
