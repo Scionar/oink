@@ -1,10 +1,10 @@
 .accordion {
   background-color: var(--color-white);
-  border: 1px solid var(--color-gray-scale-40);
+  border: 1px solid var(--color-gray-scale-70);
   margin-bottom: -1px;
 }
 
-.accordionExpanded {
+.accordion[open] {
   background-color: var(--color-gray-scale-90);
 }
 
@@ -21,10 +21,14 @@
 .summaryWrapper {
   display: flex;
   flex-direction: row;
-  transition: height 0.5s;
 }
 
-.accordionExpanded .summaryWrapper {
+.summaryWrapper::marker, /* Latest Chrome, Edge, Firefox */ 
+.summaryWrapper::-webkit-details-marker /* Safari */ {
+  display: none;
+}
+
+.accordion[open] .summaryWrapper {
   border-bottom: 1px solid var(--color-gray-scale-70);
 }
 
@@ -34,7 +38,7 @@
   margin: 0;
 }
 
-.accordionExpanded .summary {
+.accordion[open] .summary {
   font-weight: 600;
 }
 
@@ -44,16 +48,16 @@
 }
 
 .toggleButton {
-  all: unset;
-  border-radius: var(--theme-input-border-radius);
-  cursor: pointer;
+  display: flex;
+  align-items: center;
   color: var(--color-gray-scale-50);
   padding: 2rem;
-  transform: rotate(90deg);
+  transform: rotate(0deg);
   transition: transform 0.5s;
+  pointer-events: none;
 }
 
-.accordionExpanded .toggleButton {
+.accordion[open] .toggleButton {
   color: var(--color-black);
 }
 
@@ -61,10 +65,24 @@
   outline: var(--theme-focus-color) solid 2px;
 }
 
-.accordionExpanded .toggleButton {
-  transform: rotate(-90deg);
+.accordion[open] .toggleButton {
+  transform: rotate(-180deg);
 }
 
 .content {
   padding: 1rem;
+  overflow: hidden;
+}
+
+.accordion[open] .content {
+  animation: accordion 0.5s ease-in-out;
+}
+
+@keyframes accordion {
+  from {
+    max-height: 0;
+  }
+  to {
+    max-height: 1000px;
+  }
 }

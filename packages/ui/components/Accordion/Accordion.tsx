@@ -1,6 +1,6 @@
 import * as React from "react";
+import IconChevron from "../../icons/IconChevron";
 import styles from "./Accordion.module.css";
-import { clsx } from "clsx";
 
 type AccordionProps = {
   children: React.ReactNode | React.ReactNode[];
@@ -8,31 +8,17 @@ type AccordionProps = {
 };
 
 export const Accordion = ({ children, summary }: AccordionProps) => {
-  const [isExpanded, setIsExpanded] = React.useState(false);
-
-  const toggleOnClickHandler = () => {
-    setIsExpanded(!isExpanded);
-  };
-
   return (
-    <div
-      className={clsx({
-        [styles.accordion]: true,
-        [styles.accordionExpanded]: isExpanded,
-      })}
-    >
-      <div className={styles.summaryWrapper} onClick={toggleOnClickHandler}>
+    <details className={styles.accordion}>
+      <summary className={styles.summaryWrapper}>
         <p className={styles.summary}>{summary}</p>
         <div className={styles.toggleWrapper}>
-          <button
-            className={styles.toggleButton}
-            onClick={toggleOnClickHandler}
-          >
-            &#10148;
-          </button>
+          <div className={styles.toggleButton}>
+            <IconChevron size={13} />
+          </div>
         </div>
-      </div>
-      {isExpanded && <div className={styles.content}>{children}</div>}
-    </div>
+      </summary>
+      <div className={styles.content}>{children}</div>
+    </details>
   );
 };
