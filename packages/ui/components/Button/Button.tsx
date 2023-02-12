@@ -3,10 +3,11 @@ import { clsx } from "clsx";
 import styles from "./Button.module.css";
 
 type ButtonProps = {
-  children: string;
+  children: string | string[] | React.ReactElement;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
   variant?: "positive";
+  onClick: () => void;
 };
 
 export const Button = ({
@@ -14,6 +15,7 @@ export const Button = ({
   type = "button",
   disabled,
   variant,
+  onClick,
 }: ButtonProps) => (
   <button
     type={type}
@@ -22,6 +24,7 @@ export const Button = ({
       [styles.button]: true,
       [styles.positive]: variant === "positive",
     })}
+    onClick={onClick}
   >
     {children}
     {disabled && " (disabled)"}

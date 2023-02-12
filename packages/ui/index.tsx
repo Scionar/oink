@@ -9,3 +9,5 @@ export * from "./components/Spacer/Spacer";
 export * from "./components/DateInput/DateInput";
 export * from "./components/Accordion/Accordion";
 export * from "./components/Divider/Divider";
+export * from "./components/Table/Table";
+export * from "./icons/IconTrash";
