@@ -1,11 +1,24 @@
 .accordion {
   background-color: var(--color-white);
   border: 1px solid var(--theme-border-color);
+  margin: 0;
   margin-bottom: -1px;
+  transition: margin 0.1s, border-radius 1s;
+  overflow: hidden;
 }
 
 .accordion[open] {
   background-color: var(--color-gray-scale-90);
+  border-radius: var(--theme-input-border-radius);
+  margin: 2rem 0;
+}
+
+.accordion[open]:first-child {
+  margin: 0 0 2rem 0;
+}
+
+.accordion[open]:last-child {
+  margin: 2rem 0 0 0;
 }
 
 .accordion:first-child {

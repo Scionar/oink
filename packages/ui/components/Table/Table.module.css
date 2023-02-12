@@ -20,7 +20,7 @@
 }
 
 .table tbody tr:nth-child(2n + 0) {
-  background-color: var(--color-gray-scale-80);
+  background-color: var(--color-white);
 }
 
 .table tbody td {
