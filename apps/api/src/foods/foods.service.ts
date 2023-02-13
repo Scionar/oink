@@ -34,4 +34,12 @@ export class FoodsService {
 
     return food;
   }
+
+  async delete(id: number) {
+    return await this.prisma.food.delete({
+      where: {
+        id,
+      },
+    });
+  }
 }

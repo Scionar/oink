@@ -50,6 +50,18 @@ export class ConsumptionController {
   @Delete()
   @UsePipes(new ValidationPipe({ transform: true }))
   async delete(@Body() dto: DeleteConsumptionDto) {
-    await this.consumptionService.delete(dto.id);
+    const consumption = await this.consumptionService.delete(dto.id);
+
+    const haveSameFood = await this.consumptionService.findAllWithRelatedFood(
+      consumption.foodId
+    );
+
+    // Other consumptions related to linked
+    // Food does not exist. We delete it.
+    if (!haveSameFood.length) {
+      await this.foodService.delete(consumption.foodId);
+    }
+
+    return consumption;
   }
 }

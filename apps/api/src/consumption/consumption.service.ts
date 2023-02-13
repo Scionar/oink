@@ -13,6 +13,14 @@ export class ConsumptionService {
     });
   }
 
+  async findAllWithRelatedFood(foodId: number) {
+    return await this.prisma.consumption.findMany({
+      where: {
+        foodId,
+      },
+    });
+  }
+
   async create(userId: number, foodId: number, date: string) {
     const consumption = await this.prisma.consumption.create({
       data: {
