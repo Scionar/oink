@@ -31,13 +31,17 @@ export class ConsumptionController {
   async create(@Body() dto: CreateConsumptionDto) {
     let food: Food;
 
-    try {
-      food = await this.foodService.create(dto.foodName, dto.calories);
-    } catch (error) {
-      throw new HttpException(
-        { status: HttpStatus.BAD_REQUEST, error: "Creating food failed" },
-        HttpStatus.BAD_REQUEST
-      );
+    food = await this.foodService.findMatch(dto.foodName, dto.calories);
+
+    if (!food) {
+      try {
+        food = await this.foodService.create(dto.foodName, dto.calories);
+      } catch (error) {
+        throw new HttpException(
+          { status: HttpStatus.BAD_REQUEST, error: "Creating food failed" },
+          HttpStatus.BAD_REQUEST
+        );
+      }
     }
 
     await this.consumptionService.create(dto.userId, food.id, dto.date);

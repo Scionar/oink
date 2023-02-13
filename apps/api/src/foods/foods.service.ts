@@ -9,8 +9,17 @@ export class FoodsService {
     return await this.prisma.food.findMany();
   }
 
-  findOne(): string {
-    return "";
+  async findMatch(name: string, calories: number) {
+    const food = await this.prisma.food.findFirst({
+      where: {
+        name,
+        calories,
+      },
+    });
+
+    console.log("Food found", food);
+
+    return food;
   }
 
   async create(name: string, calories: number) {
