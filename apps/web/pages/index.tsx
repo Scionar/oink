@@ -4,6 +4,7 @@ import {
   Autocomplete,
   Backdrop,
   Button,
+  Chart,
   DateInput,
   IconTrash,
   Input,
@@ -154,6 +155,11 @@ export default function Web() {
     [dataConsumptions]
   );
 
+  const chartData = dateList.map((day) => ({
+    name: day.date,
+    calories: day.calSummary,
+  }));
+
   if (isLoading || isLoadingConsumptions) return <div>Loading...</div>;
   if (!data || !dataConsumptions || error || errorConsumptions) {
     return <div>Failed</div>;
@@ -164,9 +170,7 @@ export default function Web() {
       {showGraphModal && (
         <Backdrop>
           <Modal closeHandler={closeModalHandler}>
-            <Spacer>
-              <p>Test content</p>
-            </Spacer>
+            <Chart data={chartData} />
           </Modal>
         </Backdrop>
       )}

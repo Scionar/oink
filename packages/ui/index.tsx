@@ -12,4 +12,5 @@ export * from "./components/Divider/Divider";
 export * from "./components/Table/Table";
 export * from "./components/Backdrop/Backdrop";
 export * from "./components/Modal/Modal";
+export * from "./components/Chart/Chart";
 export * from "./icons/IconTrash";

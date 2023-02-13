@@ -1,0 +1,10 @@
+.chart {
+  max-width: 100%;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  box-sizing: border-box;
+}
+
+.chart > div {
+  padding: 0 2rem 0 0;
+}
