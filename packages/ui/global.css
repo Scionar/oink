@@ -17,11 +17,12 @@
   --color-white: #ffffff;
   --color-gray: #808080;
 
+  --theme-border-radius: 0.5rem;
   --theme-border-color: var(--color-gray-scale-60);
   --theme-focus-color: #4d90fe;
   --theme-input-focus-ring-offset: 0.1rem;
   --theme-input-border-color: var(--theme-border-color);
-  --theme-input-border-radius: 0.5rem;
+  --theme-input-border-radius: var(--theme-input-border-radius);
   --theme-input-label-size: 100%;
   --theme-input-label-weight: bold;
   --theme-input-label-color: var(--color-black);

@@ -1,0 +1,55 @@
+.usermenu {
+  position: relative;
+}
+
+.profileWrapper {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1rem;
+}
+
+.name {
+  margin-right: 1rem;
+}
+
+.avatarCircle {
+  background-color: var(--color-gray-scale-80);
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 1rem;
+}
+
+.avatarImage {
+  height: 100%;
+  width: 100%;
+}
+
+.dropdown {
+  background-color: var(--color-white);
+  border-radius: var(--theme-border-radius);
+  box-shadow: 0px 0px 10px var(--color-gray-scale-70);
+  position: absolute;
+  width: 100%;
+}
+
+.dropdown ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dropdown li {
+  margin: 1rem;
+}
+
+.chevron {
+  transform: rotate(0deg);
+  transition: transform 0.1s;
+}
+
+.usermenu[open] .chevron {
+  transform: rotate(180deg);
+}

@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^2.2.1",
     "clsx": "^1.2.1",
     "date-fns": "^2.29.3",
     "next": "^13.1.1",

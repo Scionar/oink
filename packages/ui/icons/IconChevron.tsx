@@ -1,13 +1,15 @@
 type IconChevronProps = {
   size: number;
+  className?: string;
 };
 
-const IconChevron = ({ size }: IconChevronProps) => (
+export const IconChevron = ({ size, className }: IconChevronProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     width={`${size}px`}
     height={`${size}px`}
+    className={className}
   >
     <path
       fill="currentColor"

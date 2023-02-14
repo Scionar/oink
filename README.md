@@ -23,6 +23,12 @@ PRISMA_DATABASE_URL_WITH_SCHEMA=${PRISMA_DATABASE_URL}?schema=public
 
 ```
 NEXT_PUBLIC_API_URL=http://localhost:3001
+
+AUTH0_SECRET='use [openssl rand -hex 32] to generate a 32 bytes value'
+AUTH0_BASE_URL='http://localhost:3000'
+AUTH0_ISSUER_BASE_URL='https://superman.us.auth0.com'
+AUTH0_CLIENT_ID='RANDOM_HASH'
+AUTH0_CLIENT_SECRET='RANDOM_HASH'
 ```
 
 ## Develop

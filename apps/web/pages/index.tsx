@@ -12,6 +12,7 @@ import {
   Snout,
   Spacer,
   Table,
+  UserMenu,
 } from "ui";
 import "ui/normalize.css";
 import "ui/global.css";
@@ -23,6 +24,7 @@ import { Consumption, Food } from "database";
 import { formatDayData } from "../helpers/formatDayData";
 import { RecursivelyConvertDatesToStrings } from "../helpers/RecursivelyConvertDatesToStrings";
 import { ConsumptionsResponseType } from "../types";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 const options = [
   { name: "Chicken McNugget", calories: 48, id: "mcnugget" },
@@ -42,6 +44,8 @@ export default function Web() {
     useState<string>("");
   const [date, setDate] = useState<string>("");
   const [showGraphModal, setShowGraphModal] = useState<boolean>(false);
+
+  const { user } = useUser();
 
   const { data, error, isLoading, mutate } = useSWR<
     RecursivelyConvertDatesToStrings<Food[]>
@@ -174,6 +178,21 @@ export default function Web() {
           </Modal>
         </Backdrop>
       )}
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          padding: "0 1rem",
+        }}
+      >
+        <UserMenu
+          avatarUrl={user?.picture}
+          name={user?.name}
+          loginUrl="/api/auth/login"
+          logoutUrl="/api/auth/logout"
+        />
+      </div>
 
       <Article>
         <Spacer>
