@@ -6,8 +6,9 @@ import { FoodsService } from "./foods/foods.service";
 import { FoodsModule } from "./foods/foods.module";
 import { PrismaModule } from "./prisma/prisma.module";
 import { ConfigModule } from "@nestjs/config";
-import { ConsumptionService } from './consumption/consumption.service';
-import { ConsumptionModule } from './consumption/consumption.module';
+import { ConsumptionService } from "./consumption/consumption.service";
+import { ConsumptionModule } from "./consumption/consumption.module";
+import { AuthModule } from "./auth/auth.module";
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { ConsumptionModule } from './consumption/consumption.module';
       isGlobal: true,
     }),
     ConsumptionModule,
+    AuthModule,
   ],
   controllers: [AppController, FoodsController],
   providers: [AppService, FoodsService, ConsumptionService],

@@ -19,13 +19,24 @@ PRISMA_DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWD}@${POSTGRES_
 PRISMA_DATABASE_URL_WITH_SCHEMA=${PRISMA_DATABASE_URL}?schema=public
 ```
 
+**/apps/api/.env**
+
+```
+AUTH0_ISSUER_URL=issuer_url
+AUTH0_AUDIENCE=audience_identifier
+```
+
 **/apps/web/.env**
 
 ```
 NEXT_PUBLIC_API_URL=http://localhost:3001
 
+NEXT_PUBLIC_AUTH0_ISSUER_URL=auth0_issuer_url
+NEXT_PUBLIC_AUTH0_CLIENT_ID=auth0_client_id
+NEXT_PUBLIC_AUTH0_RETURN_URL="http://localhost:3000"
+
 AUTH0_SECRET='use [openssl rand -hex 32] to generate a 32 bytes value'
-AUTH0_BASE_URL='http://localhost:3000'
+AUTH0_BASE_URL="http://localhost:3000"
 AUTH0_ISSUER_BASE_URL='https://superman.us.auth0.com'
 AUTH0_CLIENT_ID='RANDOM_HASH'
 AUTH0_CLIENT_SECRET='RANDOM_HASH'

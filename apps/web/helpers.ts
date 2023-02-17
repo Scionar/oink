@@ -17,3 +17,13 @@ export async function swrDeleteFetcher(url: string, { arg }: any) {
     },
   });
 }
+
+export const swrGetFetcher = (token?: string) => (url: string, init: any) => {
+  return fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((res) => res.json());
+};

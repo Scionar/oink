@@ -6,9 +6,11 @@ import {
   HttpException,
   HttpStatus,
   Post,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
 import { Food } from "@prisma/client";
 import { FoodsService } from "../foods/foods.service";
 import { ConsumptionService } from "./consumption.service";
@@ -21,6 +23,7 @@ export class ConsumptionController {
     private foodService: FoodsService
   ) {}
 
+  @UseGuards(AuthGuard("jwt"))
   @Get()
   findAll() {
     return this.consumptionService.findAll();

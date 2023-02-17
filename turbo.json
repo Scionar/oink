@@ -1,6 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalEnv": ["NEXT_PUBLIC_API_URL"],
+  "globalEnv": ["NEXT_PUBLIC_API_URL", "NEXT_PUBLIC_AUTH0_ISSUER_URL", "NEXT_PUBLIC_AUTH0_CLIENT_ID", "NEXT_PUBLIC_AUTH0_RETURN_URL"],
   "pipeline": {
     "build": {
       "dependsOn": ["^db:generate"],

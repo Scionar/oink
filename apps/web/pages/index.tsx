@@ -19,19 +19,13 @@ import "ui/global.css";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import { ChangeEvent, useMemo, useState } from "react";
-import { swrDeleteFetcher, swrPostFetcher } from "../helpers";
-import { Consumption, Food } from "database";
+import { swrDeleteFetcher, swrGetFetcher, swrPostFetcher } from "../helpers";
+import { Food } from "database";
 import { formatDayData } from "../helpers/formatDayData";
 import { RecursivelyConvertDatesToStrings } from "../helpers/RecursivelyConvertDatesToStrings";
 import { ConsumptionsResponseType } from "../types";
-import { useUser } from "@auth0/nextjs-auth0/client";
-
-const options = [
-  { name: "Chicken McNugget", calories: 48, id: "mcnugget" },
-  { name: "French Fries", calories: 222, id: "frenchfries" },
-  { name: "Whopper", calories: 672, id: "whopper" },
-  { name: "Hawaiian Pizza", calories: 154, id: "hawaiian-pizza" },
-] as any;
+import { useAuth0 } from "@auth0/auth0-react";
+import { useToken } from "../providers/TokenProvider";
 
 export type AutocompleteOption = {
   name: string;
@@ -44,12 +38,23 @@ export default function Web() {
     useState<string>("");
   const [date, setDate] = useState<string>("");
   const [showGraphModal, setShowGraphModal] = useState<boolean>(false);
+  const token = useToken();
 
-  const { user } = useUser();
+  const {
+    isLoading: authenticationIsLoading,
+    isAuthenticated,
+    error: authenticationError,
+    user: authenticationUser,
+    loginWithRedirect,
+    logout,
+  } = useAuth0();
 
   const { data, error, isLoading, mutate } = useSWR<
     RecursivelyConvertDatesToStrings<Food[]>
-  >(`${process.env.NEXT_PUBLIC_API_URL}/foods`);
+  >(
+    `${process.env.NEXT_PUBLIC_API_URL}/foods`,
+    swrGetFetcher(token ? token : undefined)
+  );
 
   const {
     data: dataConsumptions,
@@ -57,7 +62,8 @@ export default function Web() {
     isLoading: isLoadingConsumptions,
     mutate: mutateConsumptions,
   } = useSWR<ConsumptionsResponseType>(
-    `${process.env.NEXT_PUBLIC_API_URL}/consumption`
+    `${process.env.NEXT_PUBLIC_API_URL}/consumption`,
+    swrGetFetcher(token ? token : undefined)
   );
 
   const { trigger, isMutating } = useSWRMutation(
@@ -119,6 +125,14 @@ export default function Web() {
 
   const closeModalHandler = () => {
     setShowGraphModal(false);
+  };
+
+  const loginOnClickHandler = () => {
+    return loginWithRedirect();
+  };
+
+  const logoutOnClickHandler = () => {
+    return logout({ returnTo: "http://localhost:3000" });
   };
 
   const autocompleteOptionList = useMemo(() => {
@@ -187,10 +201,10 @@ export default function Web() {
         }}
       >
         <UserMenu
-          avatarUrl={user?.picture}
-          name={user?.name}
-          loginUrl="/api/auth/login"
-          logoutUrl="/api/auth/logout"
+          avatarUrl={authenticationUser?.picture}
+          name={authenticationUser?.name}
+          loginOnClick={loginOnClickHandler}
+          logoutOnClick={logoutOnClickHandler}
         />
       </div>
 
@@ -234,18 +248,22 @@ export default function Web() {
             <Button onClick={showGraphClickHandler}>Show graph</Button>
           </div>
 
-          <div>
-            {dateList.map((day) => {
-              return (
-                <Accordion
-                  summary={`${day.date} - ${day.calSummary} kcal`}
-                  key={day.date}
-                >
-                  <Table columns={tableColumns} data={day.consumptions} />
-                </Accordion>
-              );
-            })}
-          </div>
+          <>
+            {isAuthenticated && (
+              <div>
+                {dateList.map((day) => {
+                  return (
+                    <Accordion
+                      summary={`${day.date} - ${day.calSummary} kcal`}
+                      key={day.date}
+                    >
+                      <Table columns={tableColumns} data={day.consumptions} />
+                    </Accordion>
+                  );
+                })}
+              </div>
+            )}
+          </>
         </Spacer>
       </Article>
     </>
