@@ -42,7 +42,7 @@
 }
 
 .dropdown li {
-  margin: 1rem;
+  margin: 0;
 }
 
 .chevron {
@@ -52,4 +52,15 @@
 
 .usermenu[open] .chevron {
   transform: rotate(180deg);
+}
+
+.menuButton {
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  padding: 2rem 1rem;
+  margin: 0;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
 }

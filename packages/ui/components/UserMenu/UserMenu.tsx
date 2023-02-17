@@ -4,13 +4,16 @@ import { IconChevron } from "../../icons/IconChevron";
 type UserMenuProps = {
   avatarUrl?: string | null;
   name?: string | null;
-  loginUrl: string;
-  logoutUrl: string;
+  loginOnClick: () => Promise<void>;
+  logoutOnClick: () => void;
 };
 
-export const UserMenu = ({ avatarUrl, name }: UserMenuProps) => {
-  console.log(name, "name");
-
+export const UserMenu = ({
+  avatarUrl,
+  name,
+  loginOnClick,
+  logoutOnClick,
+}: UserMenuProps) => {
   const loggedIn = !!name;
 
   return (
@@ -33,14 +36,18 @@ export const UserMenu = ({ avatarUrl, name }: UserMenuProps) => {
       </summary>
       <div className={styles.dropdown}>
         <ul>
-          {!loggedIn && (
+          {!!loginOnClick && !loggedIn && (
             <li>
-              <a href="/api/auth/login">Login</a>
+              <button className={styles.menuButton} onClick={loginOnClick}>
+                Login
+              </button>
             </li>
           )}
-          {loggedIn && (
+          {!!logoutOnClick && loggedIn && (
             <li>
-              <a href="/api/auth/logout">Logout</a>
+              <button className={styles.menuButton} onClick={logoutOnClick}>
+                Logout
+              </button>
             </li>
           )}
         </ul>
