@@ -24,7 +24,10 @@ import { Food } from "database";
 import { formatDayData } from "../helpers/formatDayData";
 import { RecursivelyConvertDatesToStrings } from "../helpers/RecursivelyConvertDatesToStrings";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useGetAllConsumptionsQuery } from "../services/consumption";
+import {
+  useAddConsumptionMutation,
+  useGetAllConsumptionsQuery,
+} from "../services/consumption";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { setToken } from "../features/user/userSlice";
 
@@ -83,15 +86,10 @@ export default function Web() {
     skip: !token,
   });
 
-  const { trigger, isMutating } = useSWRMutation(
-    `${process.env.NEXT_PUBLIC_API_URL}/consumption`,
-    swrPostFetcher,
-    {
-      onSuccess: () => {
-        mutate();
-      },
-    }
-  );
+  const [addConsumption, { isLoading: isAddConsumptionUpdating }] =
+    useAddConsumptionMutation({
+      fixedCacheKey: "mutate",
+    });
 
   const {
     trigger: triggerDeleteConsumption,
@@ -123,7 +121,7 @@ export default function Web() {
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    await trigger({
+    await addConsumption({
       foodName: event.currentTarget.foodName.value,
       calories: Number.parseInt(event.currentTarget.calories.value),
       userId: 1,
@@ -253,7 +251,7 @@ export default function Web() {
               <Button
                 variant="positive"
                 type="submit"
-                disabled={isMutating || !token}
+                disabled={isAddConsumptionUpdating || !token}
               >
                 Submit
               </Button>
