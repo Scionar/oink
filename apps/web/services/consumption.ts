@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
-import { ConsumptionsResponseType } from "../types";
+import { ConsumptionsResponseType, FoodsResponseType } from "../types";
 
 export const consumptionApi = createApi({
   reducerPath: "consumptionApi",
@@ -21,6 +21,10 @@ export const consumptionApi = createApi({
       providesTags: ["Consumption", "Food"],
       query: () => `consumption`,
       extraOptions: {},
+    }),
+    getAllFoods: builder.query<FoodsResponseType, string>({
+      providesTags: ["Food"],
+      query: () => `foods`,
     }),
     addConsumption: builder.mutation({
       invalidatesTags: ["Consumption"],
@@ -43,6 +47,7 @@ export const consumptionApi = createApi({
 
 export const {
   useGetAllConsumptionsQuery,
+  useGetAllFoodsQuery,
   useAddConsumptionMutation,
   useDeleteConsumptionMutation,
 } = consumptionApi;

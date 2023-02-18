@@ -28,6 +28,7 @@ import {
   useAddConsumptionMutation,
   useDeleteConsumptionMutation,
   useGetAllConsumptionsQuery,
+  useGetAllFoodsQuery,
 } from "../services/consumption";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { setToken } from "../features/user/userSlice";
@@ -72,12 +73,11 @@ export default function Web() {
     }
   }, [isAuthenticated, getAccessTokenSilently, dispatch]);
 
-  const { data, error, isLoading, mutate } = useSWR<
-    RecursivelyConvertDatesToStrings<Food[]>
-  >(
-    `${process.env.NEXT_PUBLIC_API_URL}/foods`,
-    swrGetFetcher(token ? token : undefined)
-  );
+  const {
+    data: dataFoods,
+    error: errorFoods,
+    isLoading: isLoadingFoods,
+  } = useGetAllFoodsQuery("");
 
   const {
     data: dataConsumptions,
@@ -139,14 +139,14 @@ export default function Web() {
   };
 
   const autocompleteOptionList = useMemo(() => {
-    if (!data) return [];
+    if (!dataFoods) return [];
 
-    return data.map((item: any) => ({
+    return dataFoods.map((item: any) => ({
       name: item.name,
       calories: item.calories,
       id: item.id,
     }));
-  }, [data]);
+  }, [dataFoods]);
 
   const tableColumns = useMemo(() => {
     return [
@@ -181,8 +181,8 @@ export default function Web() {
     calories: day.calSummary,
   }));
 
-  if (isLoading || isLoadingConsumptions) return <div>Loading...</div>;
-  if (!data || error || errorConsumptions) {
+  if (isLoadingFoods || isLoadingConsumptions) return <div>Loading...</div>;
+  if (!dataFoods || errorFoods || errorConsumptions) {
     return <div>Failed</div>;
   }
 

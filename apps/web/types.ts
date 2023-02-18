@@ -7,3 +7,7 @@ interface ConsumptionType
 }
 
 export interface ConsumptionsResponseType extends Array<ConsumptionType> {}
+
+type FoodType = RecursivelyConvertDatesToStrings<Food>;
+
+export interface FoodsResponseType extends Array<FoodType> {}
