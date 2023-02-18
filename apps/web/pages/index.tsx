@@ -144,7 +144,7 @@ export default function Web() {
   };
 
   const logoutOnClickHandler = () => {
-    return logout({ returnTo: "http://localhost:3000" });
+    return logout();
   };
 
   const autocompleteOptionList = useMemo(() => {
