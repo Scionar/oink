@@ -16,13 +16,8 @@ import {
 } from "ui";
 import "ui/normalize.css";
 import "ui/global.css";
-import useSWR from "swr";
-import useSWRMutation from "swr/mutation";
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
-import { swrDeleteFetcher, swrGetFetcher, swrPostFetcher } from "../helpers";
-import { Food } from "database";
 import { formatDayData } from "../helpers/formatDayData";
-import { RecursivelyConvertDatesToStrings } from "../helpers/RecursivelyConvertDatesToStrings";
 import { useAuth0 } from "@auth0/auth0-react";
 import {
   useAddConsumptionMutation,
