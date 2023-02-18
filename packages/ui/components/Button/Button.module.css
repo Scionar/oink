@@ -38,4 +38,5 @@ button.positive:active {
   border: 1px solid var(--color-light-gray);
   background-color: var(--theme-disabled-background-color);
   color: var(--theme-disabled-font-color);
+  text-shadow: 0 0 0.2rem #000;
 }

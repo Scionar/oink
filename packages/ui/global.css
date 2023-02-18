@@ -29,7 +29,7 @@
   --theme-input-attention: #f70776;
 
   --theme-disabled-background-color: var(--color-gray-scale-80);
-  --theme-disabled-font-color: var(--color-gray-scale-80);
+  --theme-disabled-font-color: var(--color-white);
 
   --breakpoint-sm: 0;
   --breakpoint-md: 60rem; /* 600px */
