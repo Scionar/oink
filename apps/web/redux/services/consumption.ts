@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { RootState } from "../store";
-import { ConsumptionsResponseType, FoodsResponseType } from "../types";
+import { RootState } from "../../store";
+import { ConsumptionsResponseType, FoodsResponseType } from "../../types";
 
 export const consumptionApi = createApi({
   reducerPath: "consumptionApi",

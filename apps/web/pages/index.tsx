@@ -24,9 +24,9 @@ import {
   useDeleteConsumptionMutation,
   useGetAllConsumptionsQuery,
   useGetAllFoodsQuery,
-} from "../services/consumption";
+} from "../redux/services/consumption";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { setToken } from "../features/user/userSlice";
+import { setToken } from "../redux/features/user/userSlice";
 
 export type AutocompleteOption = {
   name: string;
