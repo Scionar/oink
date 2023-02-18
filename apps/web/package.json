@@ -11,11 +11,14 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.0.0",
+    "@reduxjs/toolkit": "^1.9.2",
+    "@types/react-redux": "^7.1.25",
     "clsx": "^1.2.1",
     "date-fns": "^2.29.3",
     "next": "^13.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
     "swr": "^2.0.3",
     "ui": "*"
   },

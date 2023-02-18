@@ -1,7 +1,7 @@
 import type { AppProps } from "next/app";
-import { SWRConfig } from "swr";
 import { Auth0Provider } from "@auth0/auth0-react";
-import { TokenProvider } from "../providers/TokenProvider";
+import { Provider } from "react-redux";
+import { store } from "../store";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -15,9 +15,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       }}
       cacheLocation="localstorage"
     >
-      <TokenProvider>
+      <Provider store={store}>
         <Component {...pageProps} />
-      </TokenProvider>
+      </Provider>
     </Auth0Provider>
   );
 }

@@ -18,14 +18,15 @@ import "ui/normalize.css";
 import "ui/global.css";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
-import { ChangeEvent, useMemo, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { swrDeleteFetcher, swrGetFetcher, swrPostFetcher } from "../helpers";
 import { Food } from "database";
 import { formatDayData } from "../helpers/formatDayData";
 import { RecursivelyConvertDatesToStrings } from "../helpers/RecursivelyConvertDatesToStrings";
-import { ConsumptionsResponseType } from "../types";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useToken } from "../providers/TokenProvider";
+import { useGetAllConsumptionsQuery } from "../services/consumption";
+import { useAppDispatch, useAppSelector } from "../hooks";
+import { setToken } from "../features/user/userSlice";
 
 export type AutocompleteOption = {
   name: string;
@@ -38,7 +39,9 @@ export default function Web() {
     useState<string>("");
   const [date, setDate] = useState<string>("");
   const [showGraphModal, setShowGraphModal] = useState<boolean>(false);
-  const token = useToken();
+  const token = useAppSelector((state) => state.user.token);
+
+  const dispatch = useAppDispatch();
 
   const {
     isLoading: authenticationIsLoading,
@@ -47,7 +50,23 @@ export default function Web() {
     user: authenticationUser,
     loginWithRedirect,
     logout,
+    getAccessTokenSilently,
   } = useAuth0();
+
+  // Handle state for token
+  useEffect(() => {
+    const fetchToken = async () => {
+      const fetchedToken = await getAccessTokenSilently();
+
+      dispatch(setToken(fetchedToken));
+    };
+
+    if (isAuthenticated) {
+      fetchToken();
+    } else {
+      dispatch(setToken(null));
+    }
+  }, [isAuthenticated, getAccessTokenSilently, dispatch]);
 
   const { data, error, isLoading, mutate } = useSWR<
     RecursivelyConvertDatesToStrings<Food[]>
@@ -60,11 +79,9 @@ export default function Web() {
     data: dataConsumptions,
     error: errorConsumptions,
     isLoading: isLoadingConsumptions,
-    mutate: mutateConsumptions,
-  } = useSWR<ConsumptionsResponseType>(
-    `${process.env.NEXT_PUBLIC_API_URL}/consumption`,
-    swrGetFetcher(token ? token : undefined)
-  );
+  } = useGetAllConsumptionsQuery("", {
+    skip: !token,
+  });
 
   const { trigger, isMutating } = useSWRMutation(
     `${process.env.NEXT_PUBLIC_API_URL}/consumption`,
@@ -72,7 +89,6 @@ export default function Web() {
     {
       onSuccess: () => {
         mutate();
-        mutateConsumptions();
       },
     }
   );
@@ -86,7 +102,6 @@ export default function Web() {
     {
       onSuccess: () => {
         mutate();
-        mutateConsumptions();
       },
     }
   );
@@ -107,9 +122,6 @@ export default function Web() {
 
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(event.currentTarget.foodName.value, "name");
-    console.log(event.currentTarget.calories.value, "calories");
-    console.log(event.currentTarget.date.value, "date");
 
     await trigger({
       foodName: event.currentTarget.foodName.value,
@@ -179,7 +191,7 @@ export default function Web() {
   }));
 
   if (isLoading || isLoadingConsumptions) return <div>Loading...</div>;
-  if (!data || !dataConsumptions || error || errorConsumptions) {
+  if (!data || error || errorConsumptions) {
     return <div>Failed</div>;
   }
 
@@ -238,7 +250,11 @@ export default function Web() {
                 onChange={dateOnChangeHandler}
               />
 
-              <Button variant="positive" type="submit" disabled={isMutating}>
+              <Button
+                variant="positive"
+                type="submit"
+                disabled={isMutating || !token}
+              >
                 Submit
               </Button>
             </Spacer>
