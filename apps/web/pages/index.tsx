@@ -26,6 +26,7 @@ import { RecursivelyConvertDatesToStrings } from "../helpers/RecursivelyConvertD
 import { useAuth0 } from "@auth0/auth0-react";
 import {
   useAddConsumptionMutation,
+  useDeleteConsumptionMutation,
   useGetAllConsumptionsQuery,
 } from "../services/consumption";
 import { useAppDispatch, useAppSelector } from "../hooks";
@@ -91,18 +92,10 @@ export default function Web() {
       fixedCacheKey: "mutate",
     });
 
-  const {
-    trigger: triggerDeleteConsumption,
-    isMutating: isMutatingDeleteConsumption,
-  } = useSWRMutation(
-    `${process.env.NEXT_PUBLIC_API_URL}/consumption`,
-    swrDeleteFetcher,
-    {
-      onSuccess: () => {
-        mutate();
-      },
-    }
-  );
+  const [deleteConsumption, { isLoading: isDeleteConsumptionUpdating }] =
+    useDeleteConsumptionMutation({
+      fixedCacheKey: "mutate",
+    });
 
   const caloriesOnChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setAddInputCaloriesValue(event.currentTarget.value);
@@ -165,9 +158,9 @@ export default function Web() {
         cell: (props: any) => (
           <div style={{ textAlign: "right" }}>
             <Button
-              disabled={isMutatingDeleteConsumption}
+              disabled={isDeleteConsumptionUpdating}
               onClick={async () => {
-                await triggerDeleteConsumption({ id: props.getValue() });
+                await deleteConsumption({ id: props.getValue() });
               }}
             >
               <IconTrash size={15} />
@@ -176,7 +169,7 @@ export default function Web() {
         ),
       },
     ];
-  }, [triggerDeleteConsumption, isMutatingDeleteConsumption]);
+  }, [deleteConsumption, isDeleteConsumptionUpdating]);
 
   const dateList = useMemo(
     () => formatDayData(dataConsumptions),

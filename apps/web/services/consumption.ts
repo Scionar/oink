@@ -1,6 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { Consumption } from "database";
-import { RecursivelyConvertDatesToStrings } from "../helpers/RecursivelyConvertDatesToStrings";
 import { RootState } from "../store";
 import { ConsumptionsResponseType } from "../types";
 
@@ -32,8 +30,19 @@ export const consumptionApi = createApi({
         body,
       }),
     }),
+    deleteConsumption: builder.mutation({
+      invalidatesTags: ["Consumption"],
+      query: (body) => ({
+        url: "consumption",
+        method: "DELETE",
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useGetAllConsumptionsQuery, useAddConsumptionMutation } =
-  consumptionApi;
+export const {
+  useGetAllConsumptionsQuery,
+  useAddConsumptionMutation,
+  useDeleteConsumptionMutation,
+} = consumptionApi;
