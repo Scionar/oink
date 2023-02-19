@@ -15,6 +15,7 @@ import {
   UserMenu,
 } from "ui";
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/router";
 import { formatDayData } from "../helpers/formatDayData";
 import { useAuth0 } from "@auth0/auth0-react";
 import {
@@ -40,6 +41,7 @@ export default function Web() {
   const token = useAppSelector((state) => state.user.token);
 
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const {
     isLoading: authenticationIsLoading,
@@ -51,6 +53,16 @@ export default function Web() {
     getAccessTokenSilently,
   } = useAuth0();
 
+  // Redirect to /login if user is not authenticated
+  useEffect(() => {
+    if (!authenticationIsLoading && !isAuthenticated) {
+      // Make sure we're in the browser
+      if (typeof window !== "undefined") {
+        router.push("/login");
+      }
+    }
+  }, [authenticationIsLoading, isAuthenticated, router]);
+
   // Handle state for token
   useEffect(() => {
     const fetchToken = async () => {
@@ -59,12 +71,19 @@ export default function Web() {
       dispatch(setToken(fetchedToken));
     };
 
-    if (isAuthenticated) {
-      fetchToken();
-    } else {
-      dispatch(setToken(null));
+    if (!authenticationIsLoading) {
+      if (isAuthenticated) {
+        fetchToken();
+      } else {
+        dispatch(setToken(null));
+      }
     }
-  }, [isAuthenticated, getAccessTokenSilently, dispatch]);
+  }, [
+    isAuthenticated,
+    getAccessTokenSilently,
+    dispatch,
+    authenticationIsLoading,
+  ]);
 
   const {
     data: dataFoods,

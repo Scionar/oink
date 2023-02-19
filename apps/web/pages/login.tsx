@@ -1,3 +1,4 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import {
   Accordion,
   AppTitle,
@@ -16,6 +17,12 @@ import {
 } from "ui";
 
 export default function LoginPage() {
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
+
+  const loginOnClickHandler = () => {
+    return loginWithRedirect();
+  };
+
   return (
     <Article>
       <Spacer>
@@ -38,7 +45,9 @@ export default function LoginPage() {
           </Spacer>
         </Panel>
 
-        <Button variant="positive">Login</Button>
+        <Button variant="positive" onClick={loginOnClickHandler}>
+          Login
+        </Button>
       </Spacer>
     </Article>
   );
