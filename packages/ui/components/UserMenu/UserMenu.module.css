@@ -9,6 +9,11 @@
   padding: 1rem;
 }
 
+.profileWrapper::marker, /* Latest Chrome, Edge, Firefox */
+.profileWrapper::-webkit-details-marker /* Safari */ {
+  display: none;
+}
+
 .name {
   margin-right: 1rem;
 }
