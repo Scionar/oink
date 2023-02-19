@@ -3,6 +3,8 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import { Provider } from "react-redux";
 import { store } from "../store";
 import Head from "next/head";
+import "ui/normalize.css";
+import "ui/global.css";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (

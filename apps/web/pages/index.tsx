@@ -14,8 +14,6 @@ import {
   Table,
   UserMenu,
 } from "ui";
-import "ui/normalize.css";
-import "ui/global.css";
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { formatDayData } from "../helpers/formatDayData";
 import { useAuth0 } from "@auth0/auth0-react";

@@ -4,7 +4,7 @@ import styles from "./Spacer.module.css";
 
 type SpacerProps = {
   children: React.ReactElement | React.ReactElement[];
-  variant?: "form";
+  variant?: "form" | "article";
 };
 
 export const Spacer = ({ children, variant }: SpacerProps) => {
@@ -14,6 +14,7 @@ export const Spacer = ({ children, variant }: SpacerProps) => {
         [styles.spacer]: true,
         [styles.default]: variant === undefined,
         [styles.form]: variant === "form",
+        [styles.article]: variant === "article",
       })}
     >
       {children}

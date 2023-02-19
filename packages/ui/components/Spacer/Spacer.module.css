@@ -11,3 +11,7 @@
 .spacer.form > *:nth-child(n + 2) {
   margin-top: 2rem;
 }
+
+.spacer.article > *:nth-child(n + 2) {
+  margin-top: 2rem;
+}

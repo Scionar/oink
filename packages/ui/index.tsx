@@ -14,5 +14,7 @@ export * from "./components/Backdrop/Backdrop";
 export * from "./components/Modal/Modal";
 export * from "./components/Chart/Chart";
 export * from "./components/UserMenu/UserMenu";
+export * from "./components/AppTitle/AppTitle";
+export * from "./components/Panel/Panel";
 
 export * from "./icons/IconTrash";
