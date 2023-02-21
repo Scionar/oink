@@ -11,7 +11,8 @@
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "docker:up": "turbo run docker:up --filter=api"
+    "docker:up": "turbo run docker:up --filter=api",
+    "test": "turbo test"
   },
   "devDependencies": {
     "eslint-config-custom": "*",
