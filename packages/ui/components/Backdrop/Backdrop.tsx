@@ -1,8 +1,7 @@
-import * as React from "react";
 import styles from "./Backdrop.module.css";
 
 type BackdropProps = {
-  children: string | string[] | React.ReactElement;
+  children: any;
 };
 
 export const Backdrop = ({ children }: BackdropProps) => (

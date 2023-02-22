@@ -1,9 +1,8 @@
-import * as React from "react";
 import IconChevron from "../../icons/IconChevron";
 import styles from "./Accordion.module.css";
 
 type AccordionProps = {
-  children: React.ReactNode | React.ReactNode[];
+  children: any;
   summary: string;
 };
 

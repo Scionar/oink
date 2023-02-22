@@ -1,10 +1,9 @@
 import FocusTrap from "focus-trap-react";
-import * as React from "react";
 import { Button } from "../Button/Button";
 import styles from "./Modal.module.css";
 
 type ModalProps = {
-  children: string | string[] | React.ReactElement;
+  children: any;
   closeHandler: () => void;
 };
 

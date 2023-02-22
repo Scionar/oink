@@ -1,9 +1,8 @@
-import * as React from "react";
 import { clsx } from "clsx";
 import styles from "./Spacer.module.css";
 
 type SpacerProps = {
-  children: React.ReactElement | React.ReactElement[];
+  children: any;
   variant?: "form" | "article";
 };
 

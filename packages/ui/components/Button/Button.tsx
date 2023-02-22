@@ -1,9 +1,8 @@
-import * as React from "react";
 import { clsx } from "clsx";
 import styles from "./Button.module.css";
 
 type ButtonProps = {
-  children: string | string[] | React.ReactElement;
+  children: any;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
   variant?: "positive";

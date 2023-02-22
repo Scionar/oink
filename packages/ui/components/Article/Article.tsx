@@ -1,8 +1,7 @@
-import * as React from "react";
 import styles from "./Article.module.css";
 
 type ArticleProps = {
-  children: React.ReactElement | React.ReactElement[];
+  children: any;
 };
 
 export const Article = ({ children }: ArticleProps) => {

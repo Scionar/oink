@@ -1,8 +1,7 @@
-import * as React from "react";
 import styles from "./Panel.module.css";
 
 type PanelProps = {
-  children: string | string[] | React.ReactElement;
+  children: any;
 };
 
 export const Panel = ({ children }: PanelProps) => (
