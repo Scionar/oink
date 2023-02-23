@@ -32,6 +32,8 @@ PRISMA_DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWD}@${POSTGRES_
 
 AUTH0_ISSUER_URL=""
 AUTH0_AUDIENCE=""
+
+PORT=""
 ```
 
 **/apps/web/.env**

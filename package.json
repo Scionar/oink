@@ -16,12 +16,13 @@
   },
   "devDependencies": {
     "eslint-config-custom": "*",
-    "prettier": "latest",
-    "turbo": "latest"
+    "prettier": "latest"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=16.0.0"
   },
-  "dependencies": {},
-  "packageManager": "npm@8.9.0"
+  "packageManager": "npm@8.9.0",
+  "dependencies": {
+    "turbo": "^1.8.6"
+  }
 }

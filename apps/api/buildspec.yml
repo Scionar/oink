@@ -1,0 +1,8 @@
+version: 0.2
+
+artifacts:
+  files:
+    - dist/*
+    - package.json
+    - node_modules/*
+    - src/*
