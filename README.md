@@ -19,6 +19,16 @@ PRISMA_DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWD}@${POSTGRES_
 PRISMA_DATABASE_URL_WITH_SCHEMA=${PRISMA_DATABASE_URL}?schema=public
 ```
 
+**/packages/database-orm/.env**
+
+```
+AUTHDB_URL=""
+AUTHDB_USER=""
+AUTHDB_PASSWD=""
+AUTHDB_DB=""
+AUTHDB_PORT=""
+```
+
 **/apps/api/.env**
 
 ```
@@ -57,4 +67,14 @@ On another terminal to start API and web app:
 
 ```
 npm run dev
+```
+
+## Initialize databases
+
+Environment variables are set under database-orm package. Create database manually into Postgres instance. Then run command:
+
+```
+cd packages/database-orm
+npm run build
+npm run initialize:auth
 ```

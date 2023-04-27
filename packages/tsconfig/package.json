@@ -5,6 +5,7 @@
   "files": [
     "base.json",
     "database.json",
+    "database-orm.json",
     "nest.json",
     "nextjs.json",
     "react-library.json"

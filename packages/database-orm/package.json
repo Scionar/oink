@@ -1,0 +1,25 @@
+{
+  "name": "database-orm",
+  "version": "0.0.0",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "initialize:auth": "node dist/initializeAuth.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "pg": "^8.10.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.15"
+  },
+  "devDependencies": {
+    "@types/node": "^18.16.1",
+    "tsconfig": "*"
+  }
+}
