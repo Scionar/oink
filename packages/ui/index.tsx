@@ -19,3 +19,4 @@ export * from "./components/AppTitle/AppTitle";
 export * from "./components/Panel/Panel";
 
 export * from "./icons/IconTrash";
+export * from "./icons/IconArrowLeft";
