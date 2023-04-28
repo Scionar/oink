@@ -5,9 +5,14 @@ import Link from "next/link";
 
 export default function Home() {
   const [emailValue, setEmailValue] = useState<string>("");
+  const [passwordValue, setPasswordValue] = useState<string>("");
 
   const emailOnChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setEmailValue(event.currentTarget.value);
+  };
+
+  const passwordOnChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setPasswordValue(event.currentTarget.value);
   };
 
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -36,10 +41,11 @@ export default function Home() {
 
                 <Input
                   label="Password"
-                  value={emailValue}
+                  value={passwordValue}
                   name="password"
+                  type="password"
                   required
-                  onChange={emailOnChangeHandler}
+                  onChange={passwordOnChangeHandler}
                 />
 
                 <Button variant="positive">Login</Button>
