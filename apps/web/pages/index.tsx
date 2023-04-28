@@ -254,7 +254,7 @@ export default function Web() {
               />
 
               <Button
-                variant="positive"
+                variant="creative"
                 type="submit"
                 disabled={isAddConsumptionUpdating || !token}
               >

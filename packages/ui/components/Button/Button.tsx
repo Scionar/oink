@@ -5,7 +5,7 @@ type ButtonProps = {
   children: any;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
-  variant?: "positive";
+  variant?: "positive" | "creative";
   onClick?: () => void;
 };
 
@@ -22,6 +22,7 @@ export const Button = ({
     className={clsx({
       [styles.button]: true,
       [styles.positive]: variant === "positive",
+      [styles.creative]: variant === "creative",
     })}
     onClick={onClick}
   >

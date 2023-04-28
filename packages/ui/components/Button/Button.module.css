@@ -22,12 +22,24 @@
 }
 
 button.positive {
+  border: 1px solid #0969da;
+  background-color: #0f93d1;
+  color: var(--color-white);
+}
+
+button.positive:active {
+  border: 1px solid #0f93d1;
+  background-color: #0969da;
+  color: var(--color-white);
+}
+
+button.creative {
   border: 1px solid #347474;
   background-color: #42b883;
   color: var(--color-white);
 }
 
-button.positive:active {
+button.creative:active {
   border: 1px solid #42b883;
   background-color: #347474;
   color: var(--color-white);
