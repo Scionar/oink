@@ -1,0 +1,12 @@
+.standaloneLink {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 1.8rem;
+  color: var(--theme-link-color);
+  text-decoration: none;
+}
+
+.leftMargin {
+  margin: 0 0 0 1rem;
+}

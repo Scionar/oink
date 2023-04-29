@@ -7,6 +7,7 @@ export * from "./components/Autocomplete/Autocomplete";
 export * from "./components/Input/Input";
 export * from "./components/Space/Space";
 export * from "./components/Spacer/Spacer";
+export * from "./components/StandaloneLink/StandaloneLink";
 export * from "./components/DateInput/DateInput";
 export * from "./components/Accordion/Accordion";
 export * from "./components/Divider/Divider";

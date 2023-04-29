@@ -27,6 +27,7 @@
   --theme-input-label-weight: bold;
   --theme-input-label-color: var(--color-black);
   --theme-input-attention: #f70776;
+  --theme-link-color: #4d90fe;
 
   --theme-disabled-background-color: var(--color-gray-scale-80);
   --theme-disabled-font-color: var(--color-white);
@@ -50,4 +51,12 @@ body {
 
 p {
   line-height: 140%;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+  color: var(--theme-link-color);
 }
