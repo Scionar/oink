@@ -1,13 +1,5 @@
 import Head from "next/head";
-import {
-  Article,
-  Button,
-  Input,
-  Panel,
-  Snout,
-  Spacer,
-  StandaloneLink,
-} from "ui";
+import { Article, Button, Input, Snout, Spacer, StandaloneLink } from "ui";
 import { ChangeEvent, useState } from "react";
 import Link from "next/link";
 
