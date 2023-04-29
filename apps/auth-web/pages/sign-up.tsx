@@ -3,10 +3,7 @@ import {
   Article,
   Button,
   DateInput,
-  Divider,
-  IconArrowLeft,
   Input,
-  Panel,
   Snout,
   Space,
   Spacer,
@@ -14,8 +11,11 @@ import {
 } from "ui";
 import { ChangeEvent, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Home() {
+  const router = useRouter();
+
   const [firstNameValue, setFirstNameValue] = useState<string>("");
   const [lastNameValue, setLastNameValue] = useState<string>("");
   const [emailValue, setEmailValue] = useState<string>("");
@@ -52,6 +52,7 @@ export default function Home() {
 
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    router.push("/done");
   };
 
   return (
@@ -112,8 +113,6 @@ export default function Home() {
 
                 <Space />
 
-                {/* <Divider name="Password" /> */}
-
                 <Input
                   label="Password"
                   value={passwordValue}
@@ -134,7 +133,9 @@ export default function Home() {
 
                 <Space />
 
-                <Button variant="creative">Sign up</Button>
+                <Button type="submit" variant="creative">
+                  Sign up
+                </Button>
               </Spacer>
             </Spacer>
           </form>

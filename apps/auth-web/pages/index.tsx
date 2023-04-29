@@ -56,7 +56,9 @@ export default function Home() {
                   onChange={passwordOnChangeHandler}
                 />
 
-                <Button variant="positive">Login</Button>
+                <Button type="submit" variant="positive">
+                  Login
+                </Button>
               </Spacer>
             </Spacer>
           </form>
