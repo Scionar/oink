@@ -1,5 +1,13 @@
 import Head from "next/head";
-import { Article, Button, Input, Panel, Snout, Spacer } from "ui";
+import {
+  Article,
+  Button,
+  Input,
+  Panel,
+  Snout,
+  Spacer,
+  StandaloneLink,
+} from "ui";
 import { ChangeEvent, useState } from "react";
 import Link from "next/link";
 
@@ -62,13 +70,8 @@ export default function Home() {
             <p>Don't have an account yet?</p>
 
             <p>
-              <Link
-                href="/sign-up"
-                style={{
-                  textAlign: "right",
-                }}
-              >
-                Sign up
+              <Link href="/sign-up">
+                <StandaloneLink>Sign up!</StandaloneLink>
               </Link>
             </p>
           </div>
