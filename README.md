@@ -39,6 +39,7 @@ POSTGRES_DB=""
 POSTGRES_PORT=""
 
 PRISMA_DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWD}@${POSTGRES_URL}:${POSTGRES_PORT}/${POSTGRES_DB}
+PRISMA_DATABASE_URL_WITH_SCHEMA=${PRISMA_DATABASE_URL}?schema=public
 
 AUTH0_ISSUER_URL=""
 AUTH0_AUDIENCE=""
@@ -57,7 +58,7 @@ NEXT_PUBLIC_AUTH0_RETURN_URL=""
 
 ## Develop
 
-Build and run containers with:
+For running database container, /apps/api/.env variables need to be set. Build and run containers with:
 
 ```
 npm run docker:up
