@@ -1,5 +1,5 @@
 import { Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
-import { DynamoDBClient, GetItemCommand } from "@aws-sdk/client-dynamodb";
+import { DynamoDBClient, GetItemCommand, QueryCommand, ScanCommand } from "@aws-sdk/client-dynamodb";
 
 @Injectable()
 export class UsersRepository {
@@ -19,12 +19,13 @@ export class UsersRepository {
         let user: object;
        
         try {
-            const command = new GetItemCommand({
-                TableName: this.tableName,
-                Key: {
-                    PK: { S: 'PK#1' },
-                    SK: { S: 'SK#1' }
+            const command = new ScanCommand({
+                FilterExpression: "email = :email",
+                ExpressionAttributeValues: {
+                  ":email": { S: email },
                 },
+                ProjectionExpression: "PK, email",
+                TableName: this.tableName,
               });
 
             user = await this.db.send(command);
