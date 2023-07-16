@@ -76,6 +76,5 @@ Environment variables are set under database-orm package. Create database manual
 
 ```
 cd packages/database-orm
-npm run build
-npm run initialize:auth
+npm run migration:run
 ```
