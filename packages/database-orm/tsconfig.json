@@ -1,8 +1,26 @@
 {
-  "extends": "tsconfig/database-orm.json",
   "include": ["./src/**/*.ts"],
   "exclude": ["node_modules", "./dist"],
   "compilerOptions": {
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "composite": false,
+    "declaration": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "inlineSources": false,
+    "isolatedModules": true,
+    "moduleResolution": "node",
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "preserveWatchOutput": true,
+    "lib": ["ES2021"],
+    "module": "es2015",
+    "target": "ES2021",
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "strictPropertyInitialization": false
   }
 }

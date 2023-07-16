@@ -1,5 +1,7 @@
+import dotenv from 'dotenv'
 import { DataSource } from "typeorm";
-import { User } from "./entity/User";
+
+dotenv.config()
 
 export const AuthApiDataSource = new DataSource({
   type: "postgres",
@@ -10,7 +12,7 @@ export const AuthApiDataSource = new DataSource({
   database: process.env.AUTHDB_DB,
   synchronize: true,
   logging: true,
-  entities: [User],
+  entities: ['src/entity/**/*.ts'],
   subscribers: [],
-  migrations: [],
+  migrations: ['src/migrations/*.ts'],
 });

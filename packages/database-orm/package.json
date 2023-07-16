@@ -5,18 +5,23 @@
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "type": "module",
   "files": [
     "dist/**"
   ],
   "scripts": {
     "build": "tsc",
-    "initialize:auth": "node dist/initializeAuth.js"
+    "typeorm": "typeorm-ts-node-esm",
+    "initialize:auth": "node dist/initializeAuth.js",
+    "migration:create": "typeorm-ts-node-esm migration:create ./src/migrations/init",
+    "migration:generate": "typeorm-ts-node-esm migration:generate src/migrations/init -d src/dataSource.ts",
+    "migration:run": "typeorm-ts-node-esm migration:run -d src/dataSource.ts"
   },
   "dependencies": {
     "dotenv": "^16.0.3",
     "pg": "^8.10.0",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.3.15"
+    "typeorm": "^0.3.17"
   },
   "devDependencies": {
     "@types/node": "^18.16.1",
