@@ -70,6 +70,15 @@ On another terminal to start API and web app:
 npm run dev
 ```
 
+Default ports:
+
+| App      | Port |
+|----------|------|
+| web      | 3000 |
+| api      | 3001 |
+| auth-web | 3003 |
+| auth     | 3002 |
+
 ## Initialize databases
 
 Environment variables are set under database-orm package. Create database manually into Postgres instance. Then run command:
