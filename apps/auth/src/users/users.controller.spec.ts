@@ -7,12 +7,12 @@ import { UsersService } from './users.service';
 import { Repository } from 'typeorm';
 
 describe('UsersController', () => {
-  let module: TestingModule;
+  let testModule: TestingModule;
   let controller: UsersController;
   let usersService: UsersService;
 
   beforeEach(async () => {
-    module = await Test.createTestingModule({
+    testModule = await Test.createTestingModule({
       imports: [
         TypeORMMySqlTestingModule([User]),
         TypeOrmModule.forFeature([User]),
@@ -20,12 +20,12 @@ describe('UsersController', () => {
       providers: [UsersService],
     }).compile();
 
-    usersService = module.get<UsersService>(UsersService);
+    usersService = testModule.get<UsersService>(UsersService);
     controller = new UsersController(usersService);
   });
 
   afterAll(async () => {
-    module.close();
+    testModule.close();
   });
 
   it('should be defined', () => {
