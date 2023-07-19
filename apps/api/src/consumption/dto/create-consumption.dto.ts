@@ -1,4 +1,4 @@
-import { IsDefined, IsInt, IsString } from "class-validator";
+import { IsDefined, IsInt, IsString } from 'class-validator';
 
 export class CreateConsumptionDto {
   @IsString()

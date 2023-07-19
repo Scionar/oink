@@ -15,9 +15,9 @@ describe('UsersController', () => {
     module = await Test.createTestingModule({
       imports: [
         TypeORMMySqlTestingModule([User]),
-        TypeOrmModule.forFeature([User])
+        TypeOrmModule.forFeature([User]),
       ],
-      providers: [UsersService]
+      providers: [UsersService],
     }).compile();
 
     usersService = module.get<UsersService>(UsersService);

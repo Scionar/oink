@@ -1,7 +1,7 @@
-import * as React from "react";
-import { useCombobox, UseComboboxStateChange } from "downshift";
-import styles from "./Autocomplete.module.css";
-import { Label } from "../../common/Label/Label";
+import * as React from 'react';
+import { useCombobox, UseComboboxStateChange } from 'downshift';
+import styles from './Autocomplete.module.css';
+import { Label } from '../../common/Label/Label';
 
 export type Option = {
   name: string;
@@ -28,14 +28,14 @@ export const Autocomplete = ({
   const { isOpen, getMenuProps, getInputProps, getItemProps } = useCombobox({
     items: inputItems,
     itemToString: (item: Option | null) => {
-      return item ? item.name : "";
+      return item ? item.name : '';
     },
     onInputValueChange: ({ inputValue }) => {
       setInputItems(
         optionList.filter((item) => {
-          const value = inputValue ? inputValue.toLowerCase() : "";
+          const value = inputValue ? inputValue.toLowerCase() : '';
           return item.name.toLowerCase().startsWith(value);
-        })
+        }),
       );
     },
     onSelectedItemChange: (changes: UseComboboxStateChange<Option>) => {

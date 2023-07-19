@@ -1,4 +1,4 @@
-import styles from "./Panel.module.css";
+import styles from './Panel.module.css';
 
 type PanelProps = {
   children: any;

@@ -1,6 +1,6 @@
-import * as React from "react";
-import { clsx } from "clsx";
-import styles from "./Label.module.css";
+import * as React from 'react';
+import { clsx } from 'clsx';
+import styles from './Label.module.css';
 
 type LabelProps = {
   children: string;

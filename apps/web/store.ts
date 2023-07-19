@@ -1,6 +1,6 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { consumptionApi } from "./redux/services/consumption";
-import userReducer from "./redux/features/user/userSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import { consumptionApi } from './redux/services/consumption';
+import userReducer from './redux/features/user/userSlice';
 
 export const store = configureStore({
   reducer: {

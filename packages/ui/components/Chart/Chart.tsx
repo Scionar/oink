@@ -1,6 +1,6 @@
-import * as React from "react";
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Legend } from "recharts";
-import styles from "./Chart.module.css";
+import * as React from 'react';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Legend } from 'recharts';
+import styles from './Chart.module.css';
 
 type ChartProps = {
   data: any;

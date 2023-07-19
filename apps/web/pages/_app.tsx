@@ -1,10 +1,10 @@
-import type { AppProps } from "next/app";
-import { Auth0Provider } from "@auth0/auth0-react";
-import { Provider } from "react-redux";
-import { store } from "../store";
-import Head from "next/head";
-import "ui/normalize.css";
-import "ui/global.css";
+import type { AppProps } from 'next/app';
+import { Auth0Provider } from '@auth0/auth0-react';
+import { Provider } from 'react-redux';
+import { store } from '../store';
+import Head from 'next/head';
+import 'ui/normalize.css';
+import 'ui/global.css';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -18,8 +18,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         clientId={process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID as string}
         authorizationParams={{
           redirect_uri: process.env.NEXT_PUBLIC_AUTH0_RETURN_URL as string,
-          scope: "openid profile",
-          audience: "oink-api",
+          scope: 'openid profile',
+          audience: 'oink-api',
         }}
         cacheLocation="localstorage"
       >

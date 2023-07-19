@@ -6,11 +6,11 @@ import {
   Post,
   UsePipes,
   ValidationPipe,
-} from "@nestjs/common";
-import { CreateFoodDto } from "./dto";
-import { FoodsService } from "./foods.service";
+} from '@nestjs/common';
+import { CreateFoodDto } from './dto';
+import { FoodsService } from './foods.service';
 
-@Controller("foods")
+@Controller('foods')
 export class FoodsController {
   constructor(private foodService: FoodsService) {}
 
@@ -25,7 +25,7 @@ export class FoodsController {
     await this.foodService.create(dto.name, dto.calories);
   }
 
-  @Get(":id")
+  @Get(':id')
   findOne(@Param() params): string {
     console.log(params.id);
     return `This action returns a #${params.id} cat`;

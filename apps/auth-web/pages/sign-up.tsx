@@ -1,4 +1,4 @@
-import Head from "next/head";
+import Head from 'next/head';
 import {
   Article,
   Button,
@@ -8,21 +8,21 @@ import {
   Space,
   Spacer,
   StandaloneLink,
-} from "ui";
-import { ChangeEvent, useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
+} from 'ui';
+import { ChangeEvent, useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export default function Home() {
   const router = useRouter();
 
-  const [firstNameValue, setFirstNameValue] = useState<string>("");
-  const [lastNameValue, setLastNameValue] = useState<string>("");
-  const [emailValue, setEmailValue] = useState<string>("");
-  const [birthdayValue, setBirthdayValue] = useState<string>("");
-  const [passwordValue, setPasswordValue] = useState<string>("");
+  const [firstNameValue, setFirstNameValue] = useState<string>('');
+  const [lastNameValue, setLastNameValue] = useState<string>('');
+  const [emailValue, setEmailValue] = useState<string>('');
+  const [birthdayValue, setBirthdayValue] = useState<string>('');
+  const [passwordValue, setPasswordValue] = useState<string>('');
   const [passwordConfirmationValue, setPasswordConfirmationValue] =
-    useState<string>("");
+    useState<string>('');
 
   const firstNameOnChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setFirstNameValue(event.currentTarget.value);
@@ -45,14 +45,14 @@ export default function Home() {
   };
 
   const passwordConfirmationOnChangeHandler = (
-    event: ChangeEvent<HTMLInputElement>
+    event: ChangeEvent<HTMLInputElement>,
   ) => {
     setPasswordConfirmationValue(event.currentTarget.value);
   };
 
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    router.push("/done");
+    router.push('/done');
   };
 
   return (
@@ -62,14 +62,14 @@ export default function Home() {
       </Head>
       <Article>
         <Spacer>
-          <Snout style={{ alignSelf: "center" }} />
+          <Snout style={{ alignSelf: 'center' }} />
           <div>
             <Link
               href="/"
               style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
               }}
             >
               <StandaloneLink variant="back">Go back to Login</StandaloneLink>

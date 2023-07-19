@@ -1,5 +1,5 @@
-import * as React from "react";
-import styles from "./AppTitle.module.css";
+import * as React from 'react';
+import styles from './AppTitle.module.css';
 
 export const AppTitle = () => (
   <div className={styles.AppTitle}>

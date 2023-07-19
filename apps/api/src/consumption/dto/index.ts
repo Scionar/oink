@@ -1,2 +1,2 @@
-export * from "./create-consumption.dto";
-export * from "./delete-consumption.dto";
+export * from './create-consumption.dto';
+export * from './delete-consumption.dto';

@@ -8,22 +8,22 @@ import { hashGenerator } from './helper/hashGenerator';
 
 @Injectable()
 export class UsersService {
-    constructor(
-        @InjectRepository(User)
-        private usersRepository: Repository<User>,
-    ) {}
+  constructor(
+    @InjectRepository(User)
+    private usersRepository: Repository<User>,
+  ) {}
 
-    findAll(): Promise<User[]> {
-        return this.usersRepository.find();
-    }
+  findAll(): Promise<User[]> {
+    return this.usersRepository.find();
+  }
 
-    registerUser(user: RegisterUserDto): Promise<User> {
-        const salt = saltGenerator();
-        const passwordHash = hashGenerator(user.password, salt)
-        return this.usersRepository.save({ ...user, salt, password: passwordHash })
-    }
+  registerUser(user: RegisterUserDto): Promise<User> {
+    const salt = saltGenerator();
+    const passwordHash = hashGenerator(user.password, salt);
+    return this.usersRepository.save({ ...user, salt, password: passwordHash });
+  }
 
-    removeUserByEmail(email: string): Promise<DeleteResult> {
-        return this.usersRepository.delete({ email })
-    }
+  removeUserByEmail(email: string): Promise<DeleteResult> {
+    return this.usersRepository.delete({ email });
+  }
 }

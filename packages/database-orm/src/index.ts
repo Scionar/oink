@@ -1,4 +1,4 @@
-require("dotenv").config();
+require('dotenv').config();
 
-export * from "./dataSource";
-export { User } from "./entity/User";
+export * from './dataSource';
+export { User } from './entity/User';

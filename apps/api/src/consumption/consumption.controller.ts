@@ -9,21 +9,21 @@ import {
   UseGuards,
   UsePipes,
   ValidationPipe,
-} from "@nestjs/common";
-import { AuthGuard } from "@nestjs/passport";
-import { Food } from "@prisma/client";
-import { FoodsService } from "../foods/foods.service";
-import { ConsumptionService } from "./consumption.service";
-import { CreateConsumptionDto, DeleteConsumptionDto } from "./dto";
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { Food } from '@prisma/client';
+import { FoodsService } from '../foods/foods.service';
+import { ConsumptionService } from './consumption.service';
+import { CreateConsumptionDto, DeleteConsumptionDto } from './dto';
 
-@Controller("consumption")
+@Controller('consumption')
 export class ConsumptionController {
   constructor(
     private consumptionService: ConsumptionService,
-    private foodService: FoodsService
+    private foodService: FoodsService,
   ) {}
 
-  @UseGuards(AuthGuard("jwt"))
+  @UseGuards(AuthGuard('jwt'))
   @Get()
   findAll() {
     return this.consumptionService.findAll();
@@ -41,8 +41,8 @@ export class ConsumptionController {
         food = await this.foodService.create(dto.foodName, dto.calories);
       } catch (error) {
         throw new HttpException(
-          { status: HttpStatus.BAD_REQUEST, error: "Creating food failed" },
-          HttpStatus.BAD_REQUEST
+          { status: HttpStatus.BAD_REQUEST, error: 'Creating food failed' },
+          HttpStatus.BAD_REQUEST,
         );
       }
     }
@@ -56,7 +56,7 @@ export class ConsumptionController {
     const consumption = await this.consumptionService.delete(dto.id);
 
     const haveSameFood = await this.consumptionService.findAllWithRelatedFood(
-      consumption.foodId
+      consumption.foodId,
     );
 
     // Other consumptions related to linked

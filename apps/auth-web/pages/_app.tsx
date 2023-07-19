@@ -1,7 +1,7 @@
-import type { AppProps } from "next/app";
-import Head from "next/head";
-import "ui/normalize.css";
-import "ui/global.css";
+import type { AppProps } from 'next/app';
+import Head from 'next/head';
+import 'ui/normalize.css';
+import 'ui/global.css';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (

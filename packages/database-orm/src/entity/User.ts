@@ -3,37 +3,37 @@ import {
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
-} from "typeorm";
+} from 'typeorm';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column("text")
+  @Column('text')
   firstName: string;
 
-  @Column("text")
+  @Column('text')
   lastName: string;
 
-  @Column({ type: "text", unique: true })
+  @Column({ type: 'text', unique: true })
   email: string;
 
-  @Column("timestamp without time zone")
+  @Column('timestamp without time zone')
   birthday: Date;
 
-  @Column("timestamptz")
+  @Column('timestamptz')
   lockedUntil: Date;
 
   @CreateDateColumn()
   created: Date;
 
-  @Column("text")
+  @Column('text')
   password: string;
 
-  @Column("text")
+  @Column('text')
   salt: string;
 
-  @Column("timestamptz")
+  @Column('timestamptz')
   passwordUpdated: Date;
 }

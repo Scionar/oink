@@ -1,5 +1,5 @@
-import styles from "./UserMenu.module.css";
-import { IconChevron } from "../../icons/IconChevron";
+import styles from './UserMenu.module.css';
+import { IconChevron } from '../../icons/IconChevron';
 
 type UserMenuProps = {
   avatarUrl?: string | null;
@@ -19,7 +19,7 @@ export const UserMenu = ({
   return (
     <details className={styles.usermenu}>
       <summary className={styles.profileWrapper}>
-        <div className={styles.name}>{loggedIn ? name : "Anonymous"}</div>
+        <div className={styles.name}>{loggedIn ? name : 'Anonymous'}</div>
         <div className={styles.avatarCircle}>
           {!!avatarUrl && (
             <>

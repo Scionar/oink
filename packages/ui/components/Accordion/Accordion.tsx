@@ -1,5 +1,5 @@
-import IconChevron from "../../icons/IconChevron";
-import styles from "./Accordion.module.css";
+import IconChevron from '../../icons/IconChevron';
+import styles from './Accordion.module.css';
 
 type AccordionProps = {
   children: any;

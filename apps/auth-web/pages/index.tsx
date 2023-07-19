@@ -1,11 +1,11 @@
-import Head from "next/head";
-import { Article, Button, Input, Snout, Spacer, StandaloneLink } from "ui";
-import { ChangeEvent, useState } from "react";
-import Link from "next/link";
+import Head from 'next/head';
+import { Article, Button, Input, Snout, Spacer, StandaloneLink } from 'ui';
+import { ChangeEvent, useState } from 'react';
+import Link from 'next/link';
 
 export default function Home() {
-  const [emailValue, setEmailValue] = useState<string>("");
-  const [passwordValue, setPasswordValue] = useState<string>("");
+  const [emailValue, setEmailValue] = useState<string>('');
+  const [passwordValue, setPasswordValue] = useState<string>('');
 
   const emailOnChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setEmailValue(event.currentTarget.value);
@@ -28,7 +28,7 @@ export default function Home() {
         <Spacer>
           <form onSubmit={onSubmitHandler}>
             <Spacer variant="form">
-              <Snout style={{ alignSelf: "center" }} />
+              <Snout style={{ alignSelf: 'center' }} />
 
               <Spacer variant="article">
                 <Input
@@ -56,9 +56,9 @@ export default function Home() {
           </form>
           <div
             style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
             }}
           >
             <p>Don't have an account yet?</p>

@@ -1,5 +1,5 @@
-import { compareDesc, format, parse, parseISO } from "date-fns";
-import { ConsumptionsResponseType } from "../types";
+import { compareDesc, format, parse, parseISO } from 'date-fns';
+import { ConsumptionsResponseType } from '../types';
 
 export const formatDayData = (consumptions?: ConsumptionsResponseType) => {
   if (!consumptions || !consumptions.length) return [];
@@ -9,11 +9,11 @@ export const formatDayData = (consumptions?: ConsumptionsResponseType) => {
       groups: {
         [n: string]: { date: string; calSummary: number; consumptions: any };
       },
-      consumption
+      consumption,
     ) => {
       const dateFormat = format(
         parseISO(consumption.createdAt as unknown as string),
-        "dd.MM.yyyy"
+        'dd.MM.yyyy',
       );
       if (!groups[dateFormat]) {
         groups[dateFormat] = {
@@ -29,7 +29,7 @@ export const formatDayData = (consumptions?: ConsumptionsResponseType) => {
       });
       return groups;
     },
-    {}
+    {},
   );
 
   const toArray = Object.values(groupedData);
@@ -38,15 +38,15 @@ export const formatDayData = (consumptions?: ConsumptionsResponseType) => {
     ...day,
     calSummary: day.consumptions.reduce(
       (sum: number, consumption: any) => sum + consumption.calories,
-      0
+      0,
     ),
   }));
 
   const sortedData = calcCalSummaries.sort((a, b) =>
     compareDesc(
-      parse(a.date, "dd.MM.yyyy", new Date()),
-      parse(b.date, "dd.MM.yyyy", new Date())
-    )
+      parse(a.date, 'dd.MM.yyyy', new Date()),
+      parse(b.date, 'dd.MM.yyyy', new Date()),
+    ),
   );
 
   return sortedData;

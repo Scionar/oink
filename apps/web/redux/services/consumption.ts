@@ -1,16 +1,16 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { RootState } from "../../store";
-import { ConsumptionsResponseType, FoodsResponseType } from "../../types";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { RootState } from '../../store';
+import { ConsumptionsResponseType, FoodsResponseType } from '../../types';
 
 export const consumptionApi = createApi({
-  reducerPath: "consumptionApi",
-  tagTypes: ["Consumption", "Food"],
+  reducerPath: 'consumptionApi',
+  tagTypes: ['Consumption', 'Food'],
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_API_URL,
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).user.token;
       if (token) {
-        headers.set("authorization", `Bearer ${token}`);
+        headers.set('authorization', `Bearer ${token}`);
       }
 
       return headers;
@@ -18,27 +18,27 @@ export const consumptionApi = createApi({
   }),
   endpoints: (builder) => ({
     getAllConsumptions: builder.query<ConsumptionsResponseType, string>({
-      providesTags: ["Consumption", "Food"],
+      providesTags: ['Consumption', 'Food'],
       query: () => `consumption`,
       extraOptions: {},
     }),
     getAllFoods: builder.query<FoodsResponseType, string>({
-      providesTags: ["Food"],
+      providesTags: ['Food'],
       query: () => `foods`,
     }),
     addConsumption: builder.mutation({
-      invalidatesTags: ["Consumption"],
+      invalidatesTags: ['Consumption'],
       query: (body) => ({
-        url: "consumption",
-        method: "POST",
+        url: 'consumption',
+        method: 'POST',
         body,
       }),
     }),
     deleteConsumption: builder.mutation({
-      invalidatesTags: ["Consumption"],
+      invalidatesTags: ['Consumption'],
       query: (body) => ({
-        url: "consumption",
-        method: "DELETE",
+        url: 'consumption',
+        method: 'DELETE',
         body,
       }),
     }),

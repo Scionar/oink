@@ -1,8 +1,8 @@
-import * as React from "react";
-import styles from "./BigEmoji.module.css";
+import * as React from 'react';
+import styles from './BigEmoji.module.css';
 
 type BigEmojiProps = {
-  style: React.AllHTMLAttributes<HTMLSpanElement>["style"];
+  style: React.AllHTMLAttributes<HTMLSpanElement>['style'];
   children: string;
 };
 

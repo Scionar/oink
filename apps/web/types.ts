@@ -1,5 +1,5 @@
-import { Consumption, Food } from "database";
-import { RecursivelyConvertDatesToStrings } from "./helpers/RecursivelyConvertDatesToStrings";
+import { Consumption, Food } from 'database';
+import { RecursivelyConvertDatesToStrings } from './helpers/RecursivelyConvertDatesToStrings';
 
 interface ConsumptionType
   extends RecursivelyConvertDatesToStrings<Consumption> {

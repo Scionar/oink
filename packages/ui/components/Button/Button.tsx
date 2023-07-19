@@ -1,17 +1,17 @@
-import { clsx } from "clsx";
-import styles from "./Button.module.css";
+import { clsx } from 'clsx';
+import styles from './Button.module.css';
 
 type ButtonProps = {
   children: any;
-  type?: "button" | "submit" | "reset";
+  type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
-  variant?: "positive" | "creative";
+  variant?: 'positive' | 'creative';
   onClick?: () => void;
 };
 
 export const Button = ({
   children,
-  type = "button",
+  type = 'button',
   disabled,
   variant,
   onClick,
@@ -21,12 +21,12 @@ export const Button = ({
     disabled={disabled}
     className={clsx({
       [styles.button]: true,
-      [styles.positive]: variant === "positive",
-      [styles.creative]: variant === "creative",
+      [styles.positive]: variant === 'positive',
+      [styles.creative]: variant === 'creative',
     })}
     onClick={onClick}
   >
     {children}
-    {disabled && " (disabled)"}
+    {disabled && ' (disabled)'}
   </button>
 );

@@ -1,5 +1,5 @@
-import { Injectable } from "@nestjs/common";
-import { PrismaService } from "../prisma/prisma.service";
+import { Injectable } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class FoodsService {
@@ -17,7 +17,7 @@ export class FoodsService {
       },
     });
 
-    console.log("Food found", food);
+    console.log('Food found', food);
 
     return food;
   }
@@ -30,7 +30,7 @@ export class FoodsService {
       },
     });
 
-    console.log("Food created", food);
+    console.log('Food created', food);
 
     return food;
   }

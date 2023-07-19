@@ -13,19 +13,19 @@ import {
   Spacer,
   Table,
   UserMenu,
-} from "ui";
-import { ChangeEvent, useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/router";
-import { formatDayData } from "../helpers/formatDayData";
-import { useAuth0 } from "@auth0/auth0-react";
+} from 'ui';
+import { ChangeEvent, useEffect, useMemo, useState } from 'react';
+import { useRouter } from 'next/router';
+import { formatDayData } from '../helpers/formatDayData';
+import { useAuth0 } from '@auth0/auth0-react';
 import {
   useAddConsumptionMutation,
   useDeleteConsumptionMutation,
   useGetAllConsumptionsQuery,
   useGetAllFoodsQuery,
-} from "../redux/services/consumption";
-import { useAppDispatch, useAppSelector } from "../hooks";
-import { setToken } from "../redux/features/user/userSlice";
+} from '../redux/services/consumption';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { setToken } from '../redux/features/user/userSlice';
 
 export type AutocompleteOption = {
   name: string;
@@ -35,8 +35,8 @@ export type AutocompleteOption = {
 
 export default function Web() {
   const [addInputCaloriesValue, setAddInputCaloriesValue] =
-    useState<string>("");
-  const [date, setDate] = useState<string>("");
+    useState<string>('');
+  const [date, setDate] = useState<string>('');
   const [showGraphModal, setShowGraphModal] = useState<boolean>(false);
   const token = useAppSelector((state) => state.user.token);
 
@@ -57,8 +57,8 @@ export default function Web() {
   useEffect(() => {
     if (!authenticationIsLoading && !isAuthenticated) {
       // Make sure we're in the browser
-      if (typeof window !== "undefined") {
-        router.push("/login");
+      if (typeof window !== 'undefined') {
+        router.push('/login');
       }
     }
   }, [authenticationIsLoading, isAuthenticated, router]);
@@ -89,24 +89,24 @@ export default function Web() {
     data: dataFoods,
     error: errorFoods,
     isLoading: isLoadingFoods,
-  } = useGetAllFoodsQuery("");
+  } = useGetAllFoodsQuery('');
 
   const {
     data: dataConsumptions,
     error: errorConsumptions,
     isLoading: isLoadingConsumptions,
-  } = useGetAllConsumptionsQuery("", {
+  } = useGetAllConsumptionsQuery('', {
     skip: !token,
   });
 
   const [addConsumption, { isLoading: isAddConsumptionUpdating }] =
     useAddConsumptionMutation({
-      fixedCacheKey: "mutate",
+      fixedCacheKey: 'mutate',
     });
 
   const [deleteConsumption, { isLoading: isDeleteConsumptionUpdating }] =
     useDeleteConsumptionMutation({
-      fixedCacheKey: "mutate",
+      fixedCacheKey: 'mutate',
     });
 
   const caloriesOnChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -118,7 +118,7 @@ export default function Web() {
   };
 
   const autocompleteChangeHandler = (
-    option: AutocompleteOption | null | undefined
+    option: AutocompleteOption | null | undefined,
   ) => {
     !!option && setAddInputCaloriesValue(option?.calories);
   };
@@ -162,13 +162,13 @@ export default function Web() {
 
   const tableColumns = useMemo(() => {
     return [
-      { header: "Name", accessorKey: "name" },
-      { header: "Calories", accessorKey: "calories" },
+      { header: 'Name', accessorKey: 'name' },
+      { header: 'Calories', accessorKey: 'calories' },
       {
-        accessorKey: " ",
+        accessorKey: ' ',
         accessorFn: (row: any) => row.id,
         cell: (props: any) => (
-          <div style={{ textAlign: "right" }}>
+          <div style={{ textAlign: 'right' }}>
             <Button
               disabled={isDeleteConsumptionUpdating}
               onClick={async () => {
@@ -185,7 +185,7 @@ export default function Web() {
 
   const dateList = useMemo(
     () => formatDayData(dataConsumptions),
-    [dataConsumptions]
+    [dataConsumptions],
   );
 
   const chartData = dateList.map((day) => ({
@@ -210,9 +210,9 @@ export default function Web() {
 
       <div
         style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          padding: "0 1rem",
+          display: 'flex',
+          justifyContent: 'flex-end',
+          padding: '0 1rem',
         }}
       >
         <UserMenu
@@ -227,7 +227,7 @@ export default function Web() {
         <Spacer>
           <form onSubmit={onSubmitHandler}>
             <Spacer variant="form">
-              <Snout style={{ alignSelf: "center" }} />
+              <Snout style={{ alignSelf: 'center' }} />
 
               <Autocomplete
                 label="Name"

@@ -73,7 +73,7 @@ npm run dev
 Default ports:
 
 | App      | Port |
-|----------|------|
+| -------- | ---- |
 | web      | 3000 |
 | api      | 3001 |
 | auth-web | 3003 |

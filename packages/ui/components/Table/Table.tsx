@@ -3,8 +3,8 @@ import {
   flexRender,
   getCoreRowModel,
   useReactTable,
-} from "@tanstack/react-table";
-import styles from "./Table.module.css";
+} from '@tanstack/react-table';
+import styles from './Table.module.css';
 
 type TableProps = {
   columns: ColumnDef<unknown, any>[];
@@ -29,7 +29,7 @@ export const Table = ({ columns, data }: TableProps) => {
                   ? null
                   : flexRender(
                       header.column.columnDef.header,
-                      header.getContext()
+                      header.getContext(),
                     )}
               </th>
             ))}

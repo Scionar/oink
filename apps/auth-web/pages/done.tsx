@@ -1,6 +1,6 @@
-import Head from "next/head";
-import { Article, BigEmoji, Panel, Spacer, StandaloneLink } from "ui";
-import Link from "next/link";
+import Head from 'next/head';
+import { Article, BigEmoji, Panel, Spacer, StandaloneLink } from 'ui';
+import Link from 'next/link';
 
 export default function Done() {
   return (
@@ -10,7 +10,7 @@ export default function Done() {
       </Head>
       <Article>
         <Spacer>
-          <BigEmoji style={{ alignSelf: "center" }}>🎉</BigEmoji>
+          <BigEmoji style={{ alignSelf: 'center' }}>🎉</BigEmoji>
           <Panel>
             <Spacer variant="article">
               <h1>Congratulations!</h1>
@@ -21,16 +21,16 @@ export default function Done() {
 
               <div
                 style={{
-                  display: "flex",
-                  justifyContent: "center",
+                  display: 'flex',
+                  justifyContent: 'center',
                 }}
               >
                 <Link
                   href="/"
                   style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
                   }}
                 >
                   <StandaloneLink variant="back">

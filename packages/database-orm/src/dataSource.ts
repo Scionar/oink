@@ -1,12 +1,12 @@
-import dotenv from 'dotenv'
-import { DataSource } from "typeorm";
+import dotenv from 'dotenv';
+import { DataSource } from 'typeorm';
 
-dotenv.config()
+dotenv.config();
 
 export const AuthApiDataSource = new DataSource({
-  type: "postgres",
+  type: 'postgres',
   host: process.env.AUTHDB_URL,
-  port: parseInt(process.env.AUTHDB_PORT || "5432"),
+  port: parseInt(process.env.AUTHDB_PORT || '5432'),
   username: process.env.AUTHDB_USER,
   password: process.env.AUTHDB_PASSWD,
   database: process.env.AUTHDB_DB,

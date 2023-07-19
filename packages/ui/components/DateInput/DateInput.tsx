@@ -1,6 +1,6 @@
-import * as React from "react";
-import { Label } from "../../common/Label/Label";
-import styles from "./DateInput.module.css";
+import * as React from 'react';
+import { Label } from '../../common/Label/Label';
+import styles from './DateInput.module.css';
 
 type DateInputProps = {
   label: string;
