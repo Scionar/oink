@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { RegisterUserDto } from './dto/RegisterUser.dto';
@@ -21,5 +21,9 @@ export class UsersService {
         const salt = saltGenerator();
         const passwordHash = hashGenerator(user.password, salt)
         return this.usersRepository.save({ ...user, salt, password: passwordHash })
+    }
+
+    removeUserByEmail(email: string): Promise<DeleteResult> {
+        return this.usersRepository.delete({ email })
     }
 }

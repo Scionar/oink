@@ -7,6 +7,10 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { User } from "./users/user.entity";
+import { TokenController } from './token/token.controller';
+import { TokenService } from './token/token.service';
+import { TokenModule } from './token/token.module';
+import { config, datasource } from '../data-source';
 
 @Module({
   imports: [
@@ -14,23 +18,18 @@ import { User } from "./users/user.entity";
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (config: ConfigService) => ({
-        type: "postgres",
-        host: config.get('AUTHDB_URL'),
-        port: config.get('AUTHDB_PORT'),
-        username: config.get('AUTHDB_USER'),
-        password: config.get('AUTHDB_PASSWD'),
-        database: config.get('AUTHDB_DB'),
-        synchronize: true,
-        logging: true,
-        entities: [User],
-        subscribers: [],
-        migrations: [],
+        type: 'postgres',
+        migrationsRun: false
       }),
+      dataSourceFactory: async () => {
+        return datasource
+      },
       inject: [ConfigService],
     }),
-    UsersModule
+    UsersModule,
+    TokenModule
   ],
-  controllers: [AppController, UsersController],
-  providers: [AppService, UsersService],
+  controllers: [AppController, UsersController, TokenController],
+  providers: [AppService, UsersService, TokenService],
 })
 export class AppModule {}
