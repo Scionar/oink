@@ -1,0 +1,24 @@
+{
+  "name": "auth-verification",
+  "version": "0.0.0",
+  "type": "commonjs",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^9.0.1",
+    "tsconfig": "*",
+    "typescript": "^4.5.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-custom": "*"
+  }
+}
