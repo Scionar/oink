@@ -81,9 +81,19 @@ Default ports:
 
 ## Initialize databases
 
-Environment variables are set under database-orm package. Create database manually into Postgres instance. Then run command:
+Environment variables are set under database-orm package. Create database manually into Postgres instance.Then run command:
 
 ```
 cd packages/database-orm
 npm run migration:run
 ```
+
+## Generate keys for Auth API
+
+Auth API needs private & public keys to be generated. Keys are used to generate and verify access tokens. You need to have OpenSSL installed.
+
+```
+npm run keys:generate-private
+npm run keys:generate-public
+```
+
