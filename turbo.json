@@ -39,6 +39,12 @@
     },
     "db:push": {
       "cache": false
+    },
+    "keys:generate-private": {
+      "cache": false
+    },
+    "keys:generate-public": {
+      "cache": false
     }
   }
 }

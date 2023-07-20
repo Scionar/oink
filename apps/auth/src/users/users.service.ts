@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { RegisterUserDto } from './dto/RegisterUser.dto';
 import { saltGenerator } from './helper/saltGenerator';
-import { hashGenerator } from './helper/hashGenerator';
+import { hashGenerator } from '../helper/hashGenerator';
 
 @Injectable()
 export class UsersService {
@@ -21,6 +21,14 @@ export class UsersService {
     const salt = saltGenerator();
     const passwordHash = hashGenerator(user.password, salt);
     return this.usersRepository.save({ ...user, salt, password: passwordHash });
+  }
+
+  getUserByAccount(account: string): Promise<User> {
+    return this.usersRepository.findOneBy({ account });
+  }
+
+  getUserByEmail(email: string): Promise<User> {
+    return this.usersRepository.findOneBy({ email });
   }
 
   removeUserByEmail(email: string): Promise<DeleteResult> {

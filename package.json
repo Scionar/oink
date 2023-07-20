@@ -14,7 +14,9 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "docker:up": "turbo run docker:up --filter=api",
     "test": "turbo test",
-    "prepare": "husky install .husky"
+    "prepare": "husky install .husky",
+    "keys:generate-private": "turbo run keys:generate-private",
+    "keys:generate-public": "turbo run keys:generate-public"
   },
   "devDependencies": {
     "eslint-config-custom": "*",
