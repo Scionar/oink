@@ -4,21 +4,21 @@ import {
   Body,
   Controller,
   HttpStatus,
+  Inject,
   Post,
   Res,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { CreateAccessTokenDto } from './dto/CreateAccessToken.dto';
-import { UsersService } from '../users/users.service';
-import { hashGenerator } from '../helper/hashGenerator';
-import { generateAccessToken } from './helper/generateAccessToken';
 import { VerifyAccessTokenDto } from './dto/VerifyAccessToken.dto';
 import { verifyAccessToken } from 'auth-verification';
+import { TokenService } from './token.service';
 
 @Controller('token')
 export class TokenController {
-  constructor(private usersService: UsersService) {}
+  @Inject(TokenService)
+  private readonly tokenService: TokenService;
 
   @Post('/create')
   @UsePipes(new ValidationPipe({ transform: true }))
@@ -26,20 +26,16 @@ export class TokenController {
     @Body() createAccessTokenDto: CreateAccessTokenDto,
     @Res() res: any,
   ) {
-    const user: object = await this.usersService.getUserByAccount(
-      createAccessTokenDto.account,
-    );
-    if (!user) return res.status(HttpStatus.UNAUTHORIZED);
+    let accessToken;
 
-    const givenPasswordHash = hashGenerator(
-      createAccessTokenDto.password,
-      user['salt'],
-    );
-
-    if (givenPasswordHash !== user['password'])
+    try {
+      accessToken = await this.tokenService.generateAccessToken(
+        createAccessTokenDto.account,
+        createAccessTokenDto.password,
+      );
+    } catch (error) {
       return res.status(HttpStatus.UNAUTHORIZED);
-
-    const accessToken = generateAccessToken(user);
+    }
 
     return res.status(HttpStatus.OK).json({ accessToken });
   }
