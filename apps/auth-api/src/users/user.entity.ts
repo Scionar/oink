@@ -10,8 +10,11 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column('text', { default: 'USER' })
+  role: string;
+
   @Column('text')
-  account: string;
+  username: string;
 
   @Column({ type: 'text', unique: true })
   email: string;

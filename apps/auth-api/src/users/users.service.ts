@@ -23,8 +23,8 @@ export class UsersService {
     return this.usersRepository.save({ ...user, salt, password: passwordHash });
   }
 
-  getUserByAccount(account: string): Promise<User> {
-    return this.usersRepository.findOneBy({ account });
+  getUserByUsername(username: string): Promise<User> {
+    return this.usersRepository.findOneBy({ username });
   }
 
   getUserByEmail(email: string): Promise<User> {

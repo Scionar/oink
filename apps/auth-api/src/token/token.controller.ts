@@ -30,7 +30,7 @@ export class TokenController {
 
     try {
       accessToken = await this.tokenService.generateAccessToken(
-        createAccessTokenDto.account,
+        createAccessTokenDto.username,
         createAccessTokenDto.password,
       );
     } catch (error) {
