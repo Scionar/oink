@@ -32,14 +32,11 @@ AUTHDB_PORT=""
 **/apps/api/.env**
 
 ```
-POSTGRES_URL=""
-POSTGRES_USER=""
-POSTGRES_PASSWD=""
-POSTGRES_DB=""
-POSTGRES_PORT=""
-
-PRISMA_DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWD}@${POSTGRES_URL}:${POSTGRES_PORT}/${POSTGRES_DB}
-PRISMA_DATABASE_URL_WITH_SCHEMA=${PRISMA_DATABASE_URL}?schema=public
+CONTENTDB_URL=""
+CONTENTDB_PORT=""
+CONTENTDB_USER=""
+CONTENTDB_PASSWD=""
+CONTENTDB_DB=""
 
 AUTH0_ISSUER_URL=""
 AUTH0_AUDIENCE=""
@@ -96,4 +93,3 @@ Auth API needs private & public keys to be generated. Keys are used to generate 
 npm run keys:generate-private
 npm run keys:generate-public
 ```
-

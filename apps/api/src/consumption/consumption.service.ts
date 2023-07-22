@@ -1,48 +1,63 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Consumption } from './consumption.entity';
+import { Repository } from 'typeorm';
+import { Food } from '../foods/food.entity';
 
 @Injectable()
 export class ConsumptionService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    @InjectRepository(Consumption)
+    private consumptionRepository: Repository<Consumption>,
+  ) {}
 
   async findAll() {
-    return await this.prisma.consumption.findMany({
-      include: {
+    return await this.consumptionRepository.find({
+      relations: {
         food: true,
+      },
+      loadRelationIds: true,
+      select: {
+        id: true,
+        createdAt: true,
+        food: {
+          id: true,
+          name: true,
+          calories: true,
+        },
       },
     });
   }
 
   async findAllWithRelatedFood(foodId: number) {
-    return await this.prisma.consumption.findMany({
+    return await this.consumptionRepository.find({
+      relations: {
+        food: true,
+      },
       where: {
-        foodId,
+        food: {
+          id: foodId,
+        },
       },
     });
   }
 
-  async create(userId: number, foodId: number, date: string) {
-    const consumption = await this.prisma.consumption.create({
-      data: {
-        foodId,
-        userId,
-        createdAt: date ? new Date(date) : undefined,
-      },
+  async create(userId: number, food: Partial<Food>, date: string) {
+    return await this.consumptionRepository.save({
+      food: food,
+      userId,
+      createdAt: date ? new Date(date) : undefined,
     });
-
-    console.log('Consumption created', consumption);
-
-    return consumption;
   }
 
-  async delete(id: number) {
-    const consumption = await this.prisma.consumption.delete({
+  async delete(id: number): Promise<Consumption> {
+    const consumption = await this.consumptionRepository.findOne({
       where: {
         id,
       },
     });
 
-    console.log('Consumption delete', consumption);
+    await this.consumptionRepository.delete({ id });
 
     return consumption;
   }

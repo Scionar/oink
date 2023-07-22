@@ -1,45 +1,53 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
+import { Food } from './food.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class FoodsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    @InjectRepository(Food)
+    private foodsRepository: Repository<Food>,
+  ) {}
 
   async findAll() {
-    return await this.prisma.food.findMany();
+    return await this.foodsRepository.find({
+      relations: {
+        consumption: true,
+      },
+    });
   }
 
-  async findMatch(name: string, calories: number) {
-    const food = await this.prisma.food.findFirst({
+  async findMatch(name: string, calories: number): Promise<Food> {
+    return await this.foodsRepository.findOne({
+      relations: {
+        consumption: true,
+      },
       where: {
         name,
         calories,
       },
     });
-
-    console.log('Food found', food);
-
-    return food;
   }
 
-  async create(name: string, calories: number) {
-    const food = await this.prisma.food.create({
-      data: {
-        name,
-        calories,
-      },
+  async create(name: string, calories: number): Promise<Food> {
+    const createdFood = await this.foodsRepository.save({
+      name,
+      calories,
+      userId: 1,
     });
 
-    console.log('Food created', food);
-
-    return food;
+    return await this.foodsRepository.findOne({
+      relations: {
+        consumption: true,
+      },
+      where: {
+        id: createdFood.id,
+      },
+    });
   }
 
   async delete(id: number) {
-    return await this.prisma.food.delete({
-      where: {
-        id,
-      },
-    });
+    await this.foodsRepository.delete({ id });
   }
 }

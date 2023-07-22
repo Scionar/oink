@@ -11,7 +11,12 @@
     "AUTHDB_PORT",
     "AUTHDB_USER",
     "AUTHDB_PASSWD",
-    "AUTHDB_DB"
+    "AUTHDB_DB",
+    "CONTENTDB_URL",
+    "CONTENTDB_PORT",
+    "CONTENTDB_USER",
+    "CONTENTDB_PASSWD",
+    "CONTENTDB_DB"
   ],
   "pipeline": {
     "build": {

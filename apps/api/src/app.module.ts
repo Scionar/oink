@@ -1,26 +1,33 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { FoodsController } from './foods/foods.controller';
-import { FoodsService } from './foods/foods.service';
 import { FoodsModule } from './foods/foods.module';
-import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
-import { ConsumptionService } from './consumption/consumption.service';
 import { ConsumptionModule } from './consumption/consumption.module';
 import { AuthModule } from './auth/auth.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { datasource } from './data-source';
 
 @Module({
   imports: [
-    FoodsModule,
-    PrismaModule,
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: () => ({
+        type: 'postgres',
+        migrationsRun: false,
+      }),
+      dataSourceFactory: async () => {
+        return datasource;
+      },
+    }),
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    FoodsModule,
     ConsumptionModule,
     AuthModule,
   ],
-  controllers: [AppController, FoodsController],
-  providers: [AppService, FoodsService, ConsumptionService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

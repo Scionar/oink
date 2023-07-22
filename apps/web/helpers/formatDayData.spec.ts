@@ -1,5 +1,5 @@
 import { formatDayData } from './formatDayData';
-import { ConsumptionsResponseType } from '../types';
+import { ConsumptionsResponseType, FoodType } from '../types';
 
 describe('formatDayData', () => {
   it('returns empty array if no input given', () => {
@@ -11,14 +11,13 @@ describe('formatDayData', () => {
     const input: ConsumptionsResponseType = [
       {
         id: 1,
-        foodId: 1,
         createdAt: '2023-02-04T20:32:12.634Z',
         food: {
           id: 1,
           calories: 370,
           name: 'Muffin',
           createdAt: '2023-02-04T20:32:12.634Z',
-        },
+        } as FoodType,
         userId: 1,
       },
     ];
@@ -42,26 +41,24 @@ describe('formatDayData', () => {
     const input: ConsumptionsResponseType = [
       {
         id: 1,
-        foodId: 1,
         createdAt: '2023-02-04T20:32:12.634Z',
         food: {
           id: 1,
           calories: 370,
           name: 'Muffin',
           createdAt: '2023-02-04T20:32:12.634Z',
-        },
+        } as FoodType,
         userId: 1,
       },
       {
         id: 2,
-        foodId: 2,
         createdAt: '2023-02-04T18:32:12.634Z',
         food: {
           id: 2,
           calories: 290,
           name: 'Waffle',
           createdAt: '2023-02-04T18:32:12.634Z',
-        },
+        } as FoodType,
         userId: 1,
       },
     ];
@@ -90,26 +87,24 @@ describe('formatDayData', () => {
     const input: ConsumptionsResponseType = [
       {
         id: 1,
-        foodId: 1,
         createdAt: '2023-02-04T20:32:12.634Z',
         food: {
           id: 1,
           calories: 370,
           name: 'Muffin',
           createdAt: '2023-02-04T20:32:12.634Z',
-        },
+        } as FoodType,
         userId: 1,
       },
       {
         id: 2,
-        foodId: 2,
         createdAt: '2023-02-05T18:32:12.634Z',
         food: {
           id: 2,
           calories: 290,
           name: 'Waffle',
           createdAt: '2023-02-05T18:32:12.634Z',
-        },
+        } as FoodType,
         userId: 1,
       },
     ];
