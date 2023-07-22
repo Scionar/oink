@@ -12,7 +12,7 @@
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "docker:up": "turbo run docker:up --filter=api",
+    "docker:up": "turbo run docker:up",
     "test": "turbo test",
     "prepare": "husky install .husky",
     "keys:generate-private": "turbo run keys:generate-private",

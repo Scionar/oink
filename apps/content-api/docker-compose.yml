@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 services:
   # oink-api:
   #   container_name: oink-api
@@ -17,9 +17,9 @@ services:
     container_name: oink-postgres
     image: postgres:15.1
     ports:
-      - "${POSTGRES_PORT}:5432"
+      - '${CONTENTDB_PORT}:5432'
     restart: always
     environment:
-      POSTGRES_USER: "${POSTGRES_USER}"
-      POSTGRES_PASSWORD: "${POSTGRES_PASSWD}"
-      POSTGRES_DB: "${POSTGRES_DB}"
+      POSTGRES_USER: '${CONTENTDB_USER}'
+      POSTGRES_PASSWORD: '${CONTENTDB_PASSWD}'
+      POSTGRES_DB: '${CONTENTDB_DB}'
