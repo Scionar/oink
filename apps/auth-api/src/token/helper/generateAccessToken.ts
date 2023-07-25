@@ -2,14 +2,14 @@ import fs from 'fs';
 import jwt from 'jsonwebtoken';
 import path from 'path';
 
-export const generateAccessToken = (username: string): string => {
+export const generateAccessToken = (uuid: string): string => {
   const privateKeyPath = path.resolve(__dirname, '../../../../', 'private.pem');
   let privateKey: string;
 
   const payload = {
     iss: 'oink-auth',
     role: 'user',
-    sub: username,
+    uuid: uuid,
     iat: Math.floor(Date.now() / 1000),
     exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 7,
   };

@@ -63,6 +63,6 @@ export class TokenController {
       publicKey,
     );
 
-    return res.status(HttpStatus.OK).json({ verified });
+    return res.status(HttpStatus.OK).json({ verified: !!verified });
   }
 }

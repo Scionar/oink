@@ -15,8 +15,7 @@
     "docker:up": "turbo run docker:up",
     "test": "turbo test",
     "prepare": "husky install .husky",
-    "keys:generate-private": "turbo run keys:generate-private",
-    "keys:generate-public": "turbo run keys:generate-public"
+    "keys:generate": "sh scripts/generate-keys.sh"
   },
   "devDependencies": {
     "eslint-config-custom": "*",

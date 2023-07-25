@@ -3,7 +3,6 @@ import {
   Controller,
   Get,
   HttpStatus,
-  Param,
   Post,
   Res,
   UsePipes,
@@ -11,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { RegisterUserDto } from './dto/RegisterUser.dto';
+import { User } from './user.entity';
 
 @Controller('users')
 export class UsersController {
@@ -28,7 +28,8 @@ export class UsersController {
     @Body() registerUserDto: RegisterUserDto,
     @Res() res: any,
   ) {
-    const user: object = await this.usersService.registerUser(registerUserDto);
-    return res.status(HttpStatus.OK).json(user);
+    const user: User = await this.usersService.registerUser(registerUserDto);
+    await this.usersService.addUid(user.id);
+    return res.status(HttpStatus.OK).json();
   }
 }

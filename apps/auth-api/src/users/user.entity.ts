@@ -39,4 +39,8 @@ export class User {
 
   @Column('timestamptz', { nullable: true })
   passwordUpdated: Date;
+
+  // Identify user without exposing the id
+  @Column({ nullable: true })
+  uuid: string;
 }

@@ -22,6 +22,6 @@ export class TokenService {
     if (givenPasswordHash !== user.password)
       throw new Error('Password is not correct');
 
-    return generateAccessToken(user.username);
+    return generateAccessToken(user.uuid);
   }
 }

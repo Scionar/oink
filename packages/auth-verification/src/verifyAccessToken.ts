@@ -1,16 +1,18 @@
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 
 export const verifyAccessToken = (
   accessToken: string,
   publicKey: string,
-): boolean => {
+): string | JwtPayload => {
+  let payload: string | JwtPayload;
+
   try {
-    jwt.verify(accessToken, publicKey, {
+    payload = jwt.verify(accessToken, publicKey, {
       algorithms: ['RS256'],
     });
   } catch {
-    return false;
+    throw new Error('Invalid access token');
   }
 
-  return true;
+  return payload;
 };

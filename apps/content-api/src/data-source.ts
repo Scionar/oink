@@ -3,6 +3,7 @@ import { DataSource } from 'typeorm';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 import { Food } from './foods/food.entity';
 import { Consumption } from './consumption/consumption.entity';
+import { Profile } from './profile/profile.entity';
 require('dotenv').config();
 
 let config: TypeOrmModuleOptions & PostgresConnectionOptions = {
@@ -12,7 +13,7 @@ let config: TypeOrmModuleOptions & PostgresConnectionOptions = {
   username: process.env.CONTENTDB_USER,
   password: process.env.CONTENTDB_PASSWD,
   database: process.env.CONTENTDB_DB,
-  entities: [Food, Consumption],
+  entities: [Food, Consumption, Profile],
   synchronize: true,
 };
 
